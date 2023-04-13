@@ -3,16 +3,20 @@
     <img id="logo" src="./assets/logo.png">
   
 
-    <div id="nav">
-      <router-link to="/mainpage">메인페이지로</router-link>
+    <div id="toMain">
+      <router-link to="/mainpage">메인페이지로 </router-link>
     </div>
+
+    <div id="toMap">
+      <router-link to="/kakaomap">카카오맵 </router-link>
+    </div>
+    
     <router-view />
   </div>
 
 </template>
 
 <script>
-
 export default {
   name: 'App',
   components: {

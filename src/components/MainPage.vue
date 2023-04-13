@@ -6,11 +6,6 @@
 
     <img src="../assets/familyimg.jpg">
     
-    <div>
-      <button id="walkstart" > 산책시작 </button>
-    </div>
-
-
 
   </div>
 </template>
@@ -18,7 +13,9 @@
 <script>
 export default {
     name : "MainPage",
-}
+    components: {
+    },
+};
 </script>
 
 <style>
