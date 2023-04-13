@@ -1,14 +1,14 @@
 <template>
   <div id="mappage">
-    <h1>산책 시작 시 페이지</h1>
+    <h1>산책 진행 중 페이지</h1>
     <div id="map">
 
     </div>
 
     <div id= "walkcontainer">
         <div id="pointcontainer">
-            <img class = "point" src="../assets/point.png">
-            <img class = "point" src="../assets/point.png">
+            <img class = "point" src="../assets/getpoint.png">
+            <img class = "point" src="../assets/getpoint.png">
             <img class = "point" src="../assets/point.png">
             <img class = "point" src="../assets/point.png">
             <img class = "point" src="../assets/point.png">
@@ -16,19 +16,19 @@
         <div id="datacontainer">
             <div class="walkdata">
                 <img src="../assets/walkicon.png">
-                <p>0 걸음</p>
+                <p>516 걸음</p>
             </div>
             <div class="timerdata">
                 <img src="../assets/timericon.png">
-                <p>0 시간 0 분</p>
+                <p>0 시간 50 분</p>
             </div>
             <div class="distancedata">
                 <img src="../assets/distanceicon.png">
-                <p>0 KM</p>
+                <p>3 KM</p>
             </div>
         </div>
 
-        <button type="button" id="walkstart">산책시작</button>
+        <button type="button" id="walkend">산책종료</button>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@ p {
     margin: auto;
     width: 1000px;
     height: 2000px;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(217, 217, 217);
 }
 #map {
     width: 500px;
@@ -119,8 +119,8 @@ p {
     flex : 1;
 }
 
-#walkstart {
-    background-color: #77af9c;
+#walkend {
+    background-color: #7d0814;
     color: #ffffff;
     border: none;
     display: inline-block;
