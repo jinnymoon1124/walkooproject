@@ -4,21 +4,14 @@
       <h3>나희네 가족들</h3>
     </div>
 
-    <img src="../assets/familyimg.jpg">
-    
-    <div>
-      <button id="walkstart" > 산책시작 </button>
-    </div>
-
-
-
+    <img src="../assets/familyimg.jpg" />
   </div>
 </template>
 
 <script>
 export default {
-    name : "MainPage",
-}
+  name: "MainPage",
+};
 </script>
 
 <style>
@@ -31,5 +24,4 @@ export default {
 h3 {
   text-align: left;
 }
-
 </style>

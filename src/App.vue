@@ -1,23 +1,15 @@
 <template>
-  <div>
-    <img id="logo" src="./assets/logo.png">
-  
+  <button @click="$router.push('/mypage')">마이페이지</button>
+  <button @click="$router.push('/mainpage')">홈</button>
 
-    <div id="nav">
-      <router-link to="/mainpage">ddd</router-link>
-    </div>
-    <router-view />
-  </div>
-
+  <router-view></router-view>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  components: {
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
 
 <style>
