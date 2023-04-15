@@ -1,5 +1,5 @@
 <template>
-  <div id="mappage">
+  <div>
     <h1>산책 시작 시 페이지</h1>
     <div id="map">
 
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <button type="button" id="walkstart">산책시작</button>
+        <button type="button" id="walkstart" @click="$router.push('./walkend')">산책시작</button>
     </div>
   </div>
 </template>
@@ -70,38 +70,38 @@ p {
     letter-spacing: 3px;
 }
 
-#mappage {
+/* #mappage {
     margin: auto;
     width: 1000px;
     height: 2000px;
-    background-color: rgb(216, 216, 216);
-}
+} */
 #map {
-    width: 500px;
+    width: 700px;
     margin:auto;
-    height: 700px;
+    height: 900px;
+    z-index: 1;
 }
 #walkcontainer {
-    width:500px;
+    width:700px;
     margin: auto;
-    height: 300px;
-    background-color: rgb(255, 255, 255);
+    height: 500px;
+    background-color: rgb(231, 231, 231);
 }
 #pointcontainer {
-    height: 70px;
+    height: 90px;
 }
 #datacontainer {
-    height: 150px;
+    height: 250px;
     display: flex;
 }
 
 .timerdata img, .walkdata img, .distancedata img {
-    width: 30px;
-    padding: 20px 50px;
+    width: 40px;
+    padding: 40px 50px;
 }
 
 .point {
-    width: 30px;
+    width: 50px;
     padding: 20px 10px;
 }
 
@@ -125,7 +125,7 @@ p {
     border: none;
     display: inline-block;
     margin: 15px auto;
-    padding: 15px 30px;
+    padding: 30px 100px;
     border-radius: 15px;
     font-weight: bolder;
     letter-spacing: 2px;    

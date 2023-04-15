@@ -1,9 +1,18 @@
 <template>
-  <div id="mappage">
-    <h1>산책 진행 중 페이지</h1>
-    <div id="map">
+    
 
+    <div>
+        <!-- 산책종료할건지 확인 모달창 -->
+    <div class="black-bg" v-if="openModal == true">
+        <div class="white-bg">
+            <h2>산책을 종료하겠습니까?</h2>
+            <button class="quit" @click="openModal = false">확인</button>
+            <button class="close" @click="openModal = false">취소</button>
+        </div>
     </div>
+    <h1>산책 진행 중 페이지</h1>
+    <div id="map">    </div>
+    
 
     <div id= "walkcontainer">
         <div id="pointcontainer">
@@ -28,7 +37,7 @@
             </div>
         </div>
 
-        <button type="button" id="walkend">산책종료</button>
+        <button type="button" id="walkend" @click="openModal = true">산책종료</button>
     </div>
   </div>
 </template>
@@ -38,6 +47,7 @@ export default {
     data() {
         return {
             map : null,
+            openModal : false,
         };
     },
     mounted() {
@@ -59,49 +69,109 @@ export default {
             };
             var map = new kakao.maps.Map(container, options);
             map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+        },
+        close(event) {
+            if(event.target.classList.contains('black-bg') || event.target.classList.contains('close')) {
+                this.openModal = false;
+            } else if (event.target.classList.contains('white-bg')) {
+                this.opneModal = true
+            }
         }
-    }
+    },
 };
 </script>
 
 <style>
+
+body {
+  margin : 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  position:absolute; 
+  padding: 20px;
+  z-index: 2;
+
+}
+.white-bg {
+  width: 100%; 
+  background: white;
+  border-radius: 8px;
+  padding: 50px;
+  margin-top: 500px;
+
+} 
+.quit {
+    cursor: pointer;
+    border : none;
+    background: #6667AB;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 10px 20px;
+}
+.quit:hover {
+    background-color: rgba(182, 10, 10, 0.63);
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.5s
+}
+.close {
+    cursor: pointer;
+    border : none;
+    background: #cacaca;
+    color: rgb(67, 67, 67);
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 10px 20px;
+}
+.close:hover {
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.5s
+}
+
 p {
     font-weight: bolder;
     letter-spacing: 3px;
 }
 
-#mappage {
-    margin: auto;
-    width: 1000px;
-    height: 2000px;
-    background-color: rgb(217, 217, 217);
-}
+
 #map {
-    width: 500px;
+    width: 700px;
     margin:auto;
-    height: 700px;
+    height: 900px;
+    z-index: 1;
 }
 #walkcontainer {
-    width:500px;
+    width:700px;
     margin: auto;
-    height: 300px;
-    background-color: rgb(255, 255, 255);
+    height: 500px;
+    background-color: rgb(231, 231, 231);
 }
 #pointcontainer {
-    height: 70px;
+    height: 90px;
 }
 #datacontainer {
-    height: 150px;
+    height: 250px;
     display: flex;
 }
 
 .timerdata img, .walkdata img, .distancedata img {
-    width: 30px;
-    padding: 20px 50px;
+    width: 40px;
+    padding: 40px 50px;
 }
 
 .point {
-    width: 30px;
+    width: 50px;
     padding: 20px 10px;
 }
 
@@ -125,9 +195,13 @@ p {
     border: none;
     display: inline-block;
     margin: 15px auto;
-    padding: 15px 30px;
+    padding: 30px 100px;
     border-radius: 15px;
     font-weight: bolder;
     letter-spacing: 2px;    
 }
+
+
+
+
 </style>
