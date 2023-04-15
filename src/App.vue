@@ -1,7 +1,5 @@
 <template>
   <div>
-    <img id="logo" src="./assets/logo.png">
-  
 
     <div id="toMain">
       <router-link to="/mainpage">메인페이지로 </router-link>

@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from 'vue-router'
 import MainPage from './components/MainPage.vue'
 import KakaoMap from './components/KakaoMap.vue'
 import WalkEnd from './components/WalkEnd.vue'
+import WalkDayReport from './components/WalkDayReport.vue'
+
 
 const routes = [
     {
@@ -16,7 +18,11 @@ const routes = [
     {
         path: '/walkend',
         component: WalkEnd
-    }
+    },
+    {
+        path: '/walkdayreport',
+        component: WalkDayReport
+    },
 ]
 
 const router = createRouter({

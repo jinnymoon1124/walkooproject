@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="mappage">
     <h1>산책 시작 시 페이지</h1>
     <div id="map">
 
@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style>
+#mappage{ width:inherit; height:600px; position:relative; }
 p {
     font-weight: bolder;
     letter-spacing: 3px;
@@ -76,16 +77,16 @@ p {
     height: 2000px;
 } */
 #map {
-    width: 700px;
+    width: 750px;
     margin:auto;
     height: 900px;
     z-index: 1;
 }
 #walkcontainer {
-    width:700px;
+    width:750px;
     margin: auto;
     height: 500px;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(244, 244, 244);
 }
 #pointcontainer {
     height: 90px;
@@ -95,8 +96,12 @@ p {
     display: flex;
 }
 
+#datacontainer p {
+    font-size: 25px;
+}
+
 .timerdata img, .walkdata img, .distancedata img {
-    width: 40px;
+    width: 60px;
     padding: 40px 50px;
 }
 
@@ -127,7 +132,14 @@ p {
     margin: 15px auto;
     padding: 30px 100px;
     border-radius: 15px;
-    font-weight: bolder;
+    font-size: 30px;
     letter-spacing: 2px;    
+}
+#walkstart:hover {
+    background-color: #036439;
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.5s
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-    
-
     <div>
         <!-- 산책종료할건지 확인 모달창 -->
     <div class="black-bg" v-if="openModal == true">
         <div class="white-bg">
             <h2>산책을 종료하겠습니까?</h2>
-            <button class="quit" @click="openModal = false">확인</button>
+            <button class="quit" @click="$router.push('./walkdayreport')">확인</button>
             <button class="close" @click="openModal = false">취소</button>
         </div>
     </div>
@@ -81,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 body {
   margin : 0;
@@ -102,7 +100,8 @@ div {
   width: 100%; 
   background: white;
   border-radius: 8px;
-  padding: 50px;
+  padding: 70px;
+  font-size: 20px;
   margin-top: 500px;
 
 } 
@@ -111,10 +110,11 @@ div {
     border : none;
     background: #6667AB;
     color: white;
+    font-size: 30px;
     font-weight: bold;
     border-radius: 5px;
-    padding: 15px 30px;
-    margin: 10px 20px;
+    padding: 20px 80px;
+    margin: 20px;
 }
 .quit:hover {
     background-color: rgba(182, 10, 10, 0.63);
@@ -127,9 +127,10 @@ div {
     border : none;
     background: #cacaca;
     color: rgb(67, 67, 67);
+    font-size: 30px;
     font-weight: bold;
     border-radius: 5px;
-    padding: 15px 30px;
+    padding: 20px 80px;
     margin: 10px 20px;
 }
 .close:hover {
@@ -146,16 +147,16 @@ p {
 
 
 #map {
-    width: 700px;
+    width: 750px;
     margin:auto;
     height: 900px;
     z-index: 1;
 }
 #walkcontainer {
-    width:700px;
+    width:750px;
     margin: auto;
     height: 500px;
-    background-color: rgb(231, 231, 231);
+    background-color: rgb(244, 244, 244);
 }
 #pointcontainer {
     height: 90px;
@@ -166,7 +167,7 @@ p {
 }
 
 .timerdata img, .walkdata img, .distancedata img {
-    width: 40px;
+    width: 60px;
     padding: 40px 50px;
 }
 
@@ -190,18 +191,21 @@ p {
 }
 
 #walkend {
-    background-color: #7d0814;
+    background-color: #b40617;
     color: #ffffff;
     border: none;
     display: inline-block;
     margin: 15px auto;
     padding: 30px 100px;
     border-radius: 15px;
-    font-weight: bolder;
+    font-size: 30px;
     letter-spacing: 2px;    
 }
-
-
-
-
+#walkend:hover {
+    background-color: #790511;
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.5s
+}
 </style>
