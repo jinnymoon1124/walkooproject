@@ -4,7 +4,7 @@
   
 
     <div id="nav">
-      <router-link to="/mainpage">메인페이지로</router-link>
+      <router-link to="/mainpage">ddd</router-link>
     </div>
     <router-view />
   </div>
