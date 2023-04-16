@@ -2,7 +2,11 @@
   <div id="mappage">
     <h1>산책 시작 시 페이지</h1>
     <div id="map">
-
+        <div class="uptab">
+            <button>+</button>
+            <img src="../assets/person1.png">
+            <img src="../assets/person2.png">
+        </div>
     </div>
 
     <div id= "walkcontainer">
@@ -34,6 +38,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -81,6 +86,11 @@ p {
     margin:auto;
     height: 900px;
     z-index: 1;
+}
+.uptab {
+    z-index: 2;
+    height: 50px;
+    position: absolute;
 }
 #walkcontainer {
     width:750px;
