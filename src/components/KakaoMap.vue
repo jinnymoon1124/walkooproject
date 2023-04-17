@@ -1,14 +1,16 @@
 <template>
+  
   <div id="mappage">
-    <h1>산책 시작 시 페이지</h1>
-    <div id="map">
+    <Sidebar />
+        <div :style="{ 'margin-left' : sidebarHeight, sidebarWidth }">
+            <router-view />
+        </div>    
+    <div id="map">        
         <div class="uptab">
-            <button>+</button>
             <img src="../assets/person1.png">
             <img src="../assets/person2.png">
         </div>
     </div>
-
     <div id= "walkcontainer">
         <div id="pointcontainer">
             <img class = "point" src="../assets/point.png">
@@ -38,8 +40,16 @@
 </template>
 
 <script>
+import Sidebar from './sidebar/Sidebar.vue'
+import { sidebarWidth, sidebarHeight } from './sidebar/state';
 
 export default {
+    components: {
+        Sidebar
+    },
+    setup() {
+        return {sidebarWidth , sidebarHeight}
+    },
     data() {
         return {
             map : null,
@@ -70,7 +80,7 @@ export default {
 </script>
 
 <style>
-#mappage{ width:inherit; height:600px; position:relative; }
+#mappage{ width:inherit;  position:relative; }
 p {
     font-weight: bolder;
     letter-spacing: 3px;
@@ -91,7 +101,13 @@ p {
     z-index: 2;
     height: 50px;
     position: absolute;
+    margin-left: 100px;
 }
+.uptab img {
+    width: 100px;
+    margin: 0 10px;
+}
+
 #walkcontainer {
     width:750px;
     margin: auto;

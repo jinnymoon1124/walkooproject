@@ -4,7 +4,6 @@ import KakaoMap from './components/KakaoMap.vue'
 import WalkEnd from './components/WalkEnd.vue'
 import WalkDayReport from './components/WalkDayReport.vue'
 
-
 const routes = [
     {
         path: '/mainpage',
@@ -22,7 +21,7 @@ const routes = [
     {
         path: '/walkdayreport',
         component: WalkDayReport
-    },
+    }
 ]
 
 const router = createRouter({

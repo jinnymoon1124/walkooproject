@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div id="mappage">
+
         <!-- 산책종료할건지 확인 모달창 -->
     <div class="black-bg" v-if="openModal == true">
         <div class="white-bg">
@@ -8,8 +9,17 @@
             <button class="close" @click="openModal = false">취소</button>
         </div>
     </div>
-    <h1>산책 진행 중 페이지</h1>
-    <div id="map">    </div>
+
+        <Sidebar />
+            <div :style="{ 'margin-left' : sidebarHeight, sidebarWidth }">
+                <router-view />
+            </div>  
+        <div id="map">        
+            <div class="uptab">
+                <img src="../assets/person1.png">
+                <img src="../assets/person2.png">
+            </div>
+        </div>
     
 
     <div id= "walkcontainer">
@@ -41,7 +51,16 @@
 </template>
 
 <script>
+import Sidebar from './sidebar/Sidebar.vue'
+import { sidebarWidth, sidebarHeight } from './sidebar/state';
+
 export default {
+    components: {
+        Sidebar
+    },
+    setup() {
+        return {sidebarWidth , sidebarHeight}
+    },
     data() {
         return {
             map : null,
@@ -93,7 +112,7 @@ div {
   background: rgba(0,0,0,0.5);
   position:absolute; 
   padding: 20px;
-  z-index: 2;
+  z-index: 4;
 
 }
 .white-bg {
@@ -105,6 +124,16 @@ div {
   margin-top: 500px;
 
 } 
+.uptab {
+    z-index: 2;
+    height: 50px;
+    position: absolute;
+    margin-left: 100px;
+}
+.uptab img {
+    width: 100px;
+    margin: 0 10px;
+}
 .quit {
     cursor: pointer;
     border : none;
