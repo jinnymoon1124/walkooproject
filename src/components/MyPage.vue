@@ -1,5 +1,5 @@
 <template>
-  <div class="mypage">
+  <div class="page">
     <div class="top">
       <p class="top_name">마이페이지</p>
     </div>
@@ -13,7 +13,7 @@
           </p>
           <div class="user_character_change_box">
             <img
-              src="../assets/icon_character_change.png"
+              src="../assets/MyPage/icon_character_change.png"
               alt="캐릭터 수정 아이콘"
             />
           </div>
@@ -23,14 +23,14 @@
         </div>
         <div class="user_character_box">
           <img
-            src="../assets/user.png"
+            src="../assets/MyPage/user.png"
             alt="사용자캐릭터"
             class="user_character"
           />
         </div>
 
         <div class="alarm_box">
-          <img src="../assets/icon_alarm.png" alt="알람 아이콘" />
+          <img src="../assets/MyPage/icon_alarm.png" alt="알람 아이콘" />
         </div>
       </div>
       <div class="middle_2"></div>
@@ -41,7 +41,7 @@
       <div class="middle_4">
         <div class="middle_4_botton">
           <div>
-            <img src="../assets/icon_badge.png" alt="뱃지 아이콘">
+            <img src="../assets/MyPage/icon_badge.png" alt="뱃지 아이콘">
           </div>
         </div>
         <div class="middle_4_botton"></div>
@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style>
-.mypage {
+.page {
   width: 100vw;
   height: 100vh;
 }

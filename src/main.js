@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from './components/MyPage.vue'
+import App from './components/BadgePage.vue'
 import router from './router'
 
 const app = createApp(App)
