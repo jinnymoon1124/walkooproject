@@ -1,19 +1,20 @@
 <template>
   <div>
-    <router-link to="/kakaomap">카카오맵 </router-link>
-    
     <router-view />
+    <Menu />
   </div>
 
 </template>
 
 <script>
+import Menu from "@/components/Menu.vue";
 
 
 export default {
   name: 'App',
   components: {
-  }
+    Menu,
+  },
 }
 </script>
 
