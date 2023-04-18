@@ -4,7 +4,8 @@
     <div class="top">
       <div class="top_wrap">
         <div class="top_left">
-          <!-- <img class="icon" src="../assets/BadgePage/LeftIcon.png" /> -->
+          <!-- 마이페이지에는 뒤로가기 버튼이 없기 때문에 주석처리 -->
+          <!-- <img class="icon" src="../assets/BadgePage/LeftIcon.png" />  -->
         </div>
         <p class="top_center top_name">마이페이지</p>
         <div class="top_right"></div>
@@ -141,7 +142,7 @@ export default {
 }
 
 /* top */
-.top {
+.mypage .top {
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -152,36 +153,28 @@ export default {
   background: #687089;
   padding: 1em;
 }
-.top_wrap {
+.mypage .top_wrap {
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
 }
-.top_center {
+.mypage .top_center {
   width: 70%;
   height: fit-content;
 }
-.top_left,
-.top_right {
+.mypage .top_left,
+.mypage .top_right {
   width: 15%;
   height: fit-content;
 }
-.top_name {
-  /* position: absolute;
-  top: 70%; /* 세로로 위에서 70% 지점에 위치 */
-  /* transform: translateY(
-    -50%
-  ); 텍스트 박스의 높이의 절반만큼 위로 이동하여 중앙 정렬 */
-  /*width: 100%;*/ /* 텍스트 박스의 너비를 100%로 설정하여 가로 중앙에 위치 */
-  text-align: center; /* 텍스트를 가운데 정렬 */
-
+.mypage .top_name {
+  text-align: center;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.3rem;
   line-height: 21px;
-  /* identical to box height, or 105% */
 
   text-align: center;
   letter-spacing: -0.32px;
@@ -190,7 +183,7 @@ export default {
 }
 
 /* middle */
-.middle {
+.mypage .middle {
   position: relative;
   width: 100%;
   height: 80vh;
@@ -201,7 +194,7 @@ export default {
 }
 
 /* middle 1 */
-.middle_1 {
+.mypage .middle_1 {
   position: relative;
   width: 100%;
   height: 32%;
@@ -209,7 +202,7 @@ export default {
   justify-content: center;
   align-items: flex-end;
 }
-.user_information_box {
+.mypage .user_information_box {
   width: 70%;
   height: 50%;
   transform: translateX(5%);
@@ -224,16 +217,16 @@ export default {
 
   padding: 1em;
 }
-.user_information {
+.mypage .user_information {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 5.5vw;
+  font-size: 1.3rem;
   line-height: 1.3em;
   letter-spacing: -0.32px;
   color: #747474;
 }
-.user_name_box {
+.mypage .user_name_box {
   position: absolute;
   width: 54%;
   height: 35%;
@@ -243,7 +236,7 @@ export default {
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
-.user_name {
+.mypage .user_name {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -252,23 +245,23 @@ export default {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 5.7vw;
+  font-size: 1.3rem;
   text-align: center;
   letter-spacing: -0.32px;
   color: #747474;
 }
-.user_character_box {
+.mypage .user_character_box {
   position: absolute;
-  width: 23%;
-  height: 42%;
+  width: 4.5rem;
+  height: 4.5rem;
   top: 8%;
   left: 5%;
 }
-.user_character {
+.mypage .user_character {
   width: 100%;
   height: 100%;
 }
-.user_character_change_box {
+.mypage .user_character_change_box {
   width: 40px;
   height: 40px;
 
@@ -280,7 +273,7 @@ export default {
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
-.alarm_box {
+.mypage .alarm_box {
   position: absolute;
   width: 60px;
   height: 60px;
@@ -297,7 +290,7 @@ export default {
 }
 
 /* middle 2 */
-.middle_2 {
+.mypage .middle_2 {
   box-sizing: border-box;
   position: relative;
   width: 100%;
@@ -310,7 +303,7 @@ export default {
 }
 
 /* middle 3 */
-.middle_3 {
+.mypage .middle_3 {
   position: relative;
   width: 100%;
   height: 8%;
@@ -319,7 +312,7 @@ export default {
   align-items: center;
   justify-content: space-evenly;
 }
-.middle_3 div {
+.mypage .middle_3 div {
   width: 45%;
   height: 80%;
 
@@ -331,11 +324,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.middle_3 p {
+.mypage .middle_3 p {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 5.5vw;
+  font-size: 1.3rem;
 
   text-align: center;
   letter-spacing: -0.32px;
@@ -344,7 +337,7 @@ export default {
 }
 
 /* middle 4 */
-.middle_4 {
+.mypage .middle_4 {
   position: relative;
   width: 100%;
   height: 25%;
@@ -355,29 +348,29 @@ export default {
   box-sizing: border-box;
   padding: 1em;
 }
-.pet_profile {
+.mypage .pet_profile {
   width: fit-content;
   height: 100%;
   border-radius: 100%;
   display: flex;
   align-items: center;
 }
-.pet_profile_img {
+.mypage .pet_profile_img {
   width: 50px;
   height: 50px;
-  background-color: #bbb;
+  background-color: #ddd;
   border-radius: 100%;
 }
-.pet_status {
+.mypage .pet_status {
   padding-left: 1em;
   flex: 1;
 }
-.pet_level {
-  font-size: 20px;
+.mypage .pet_level {
+  font-size: 1.2rem;
   font-weight: bold;
   color: #747474;
 }
-.middle_4_wrap {
+.mypage .middle_4_wrap {
   width: 50%;
   height: 100%;
   display: flex;
@@ -385,7 +378,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.middle_4_wrap .btn_wrap {
+.mypage .middle_4_wrap .btn_wrap {
   width: 70px;
   height: 70px;
   background-color: #bbb;
@@ -395,11 +388,11 @@ export default {
   border-radius: 14px;
   cursor: pointer;
 }
-.middle_4_wrap .btn_wrap .icon {
+.mypage .middle_4_wrap .btn_wrap .icon {
   width: 45%;
   height: auto;
 }
-.middle_4_wrap .btn_text {
+.mypage .middle_4_wrap .btn_text {
   font-size: large;
   font-weight: bold;
   color: #747474;
@@ -408,7 +401,7 @@ export default {
 }
 
 /* middle 5 */
-.middle_5 {
+.mypage .middle_5 {
   position: relative;
   width: 100%;
   height: 8%;
@@ -416,7 +409,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.middle_5 div {
+.mypage .middle_5 div {
   width: 95%;
   height: 80%;
 
@@ -427,11 +420,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.middle_5 p {
+.mypage .middle_5 p {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 5.5vw;
+  font-size: 1.3rem;
 
   text-align: center;
   letter-spacing: -0.32px;
@@ -440,7 +433,7 @@ export default {
 }
 
 /* middle 6 */
-.middle_6 {
+.mypage .middle_6 {
   position: relative;
   width: 100%;
   height: 16%;
@@ -450,7 +443,7 @@ export default {
   box-sizing: border-box;
   padding: 0.5em 1em;
 }
-.middle_6_wrap {
+.mypage .middle_6_wrap {
   width: 30%;
   height: 100%;
   display: flex;
@@ -458,7 +451,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.middle_6_wrap .btn_wrap {
+.mypage .middle_6_wrap .btn_wrap {
   width: 50px;
   height: 50px;
   background-color: #bbb;
@@ -468,12 +461,12 @@ export default {
   border-radius: 14px;
   cursor: pointer;
 }
-.middle_6_wrap .btn_wrap .icon {
+.mypage .middle_6_wrap .btn_wrap .icon {
   width: 45%;
   height: auto;
 }
-.middle_6_wrap .btn_text {
-  font-size: 14px;
+.mypage .middle_6_wrap .btn_text {
+  font-size: large;
   font-weight: bold;
   color: #747474;
   text-align: center;
@@ -481,7 +474,7 @@ export default {
 }
 
 /* bottom */
-.bottom {
+.mypage .bottom {
   position: relative;
   width: 100%;
   height: 8vh;

@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="badgepage">
     <div class="top">
       <div class="top_wrap">
         <div class="top_left">
@@ -20,10 +20,12 @@
             <p>대표 배지</p>
           </div>
           <div class="MB_wrap">
-            <div class="MB_right">
-                <div class=""></div>
+            <div class="MB_left">
+              <img class="mainbadge_img" src alt="메인배지" />
             </div>
-            <div class="MB_left"></div>
+            <div class="MB_right">
+              <p>대표 배지를<br />설정해 보세요!</p>
+            </div>
           </div>
         </div>
       </div>
@@ -43,11 +45,11 @@ export default {
 </script>
 
 <style>
-.page {
+.badgepage {
   width: 100vw;
   height: 100vh;
 }
-.top {
+.badgepage .top {
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -58,27 +60,27 @@ export default {
   background: #687089;
   padding: 1em;
 }
-.top_wrap {
+.badgepage .top_wrap {
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
 }
-.top_center {
+.badgepage .top_center {
   width: 70%;
   height: fit-content;
 }
-.top_left,
-.top_right {
+.badgepage .top_left,
+.badgepage .top_right {
   width: 15%;
   height: fit-content;
 }
-.top_name {
+.badgepage .top_name {
   text-align: center;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 1.3rem;
   line-height: 21px;
 
   text-align: center;
@@ -86,7 +88,7 @@ export default {
 
   color: #ffffff;
 }
-.middle {
+.badgepage .middle {
   position: relative;
   width: 100%;
   height: 80vh;
@@ -95,24 +97,24 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-.scroller {
+.badgepage .scroller {
   scroll-behavior: smooth;
   overflow-y: scroll;
   -ms-overflow-style: none;
   /* IE and Edge */
 }
-.scroller::-webkit-scrollbar {
+.badgepage .scroller::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera*/
 }
-.mainbadge {
+.badgepage .mainbadge {
   width: 100%;
   height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.MB_main {
+.badgepage .MB_main {
   width: 89%;
   height: 85%;
 
@@ -130,29 +132,67 @@ export default {
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
-.MB_top {
+.badgepage .MB_top {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.3rem;
+
+  text-align: center;
+  letter-spacing: -0.32px;
+
+  color: #747474;
+}
+.badgepage .MB_wrap {
   width: 100%;
   height: auto;
   display: flex;
   align-items: center;
 }
-.MB_wrap {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-}
-.MB_right,
-.MB_left {
+.badgepage .MB_left {
   width: 50%;
   height: fit-content;
+  display: flex;
+  flex-direction: row-reverse;
 }
-.line {
+.mainbadge_img {
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
+  border-radius: 100%;
+  margin: 5px;
+}
+.badgepage .MB_right {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+.badgepage .MB_right p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 21px;
+  /* or 105% */
+
+  text-align: center;
+  letter-spacing: -0.32px;
+
+  color: #747474;
+}
+.badgepage .line {
   width: 90%;
   height: 1px;
   background: #bcbcbc;
 }
-.badgelist {
+.badgepage .badgelist {
   width: 100%;
   height: 70%;
   display: flex;
@@ -160,13 +200,13 @@ export default {
   align-items: flex-start;
   flex-wrap: wrap;
 }
-.badge {
+.badgepage .badge {
   width: 25%;
   height: 29%;
   background: #bcbcbc;
   margin: 10px;
 }
-.bottom {
+.badgepage .bottom {
   position: relative;
   width: 100%;
   height: 8vh;

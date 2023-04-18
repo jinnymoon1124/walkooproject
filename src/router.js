@@ -4,7 +4,7 @@ import BadgePage from './components/BadgePage.vue'
 
 const routes = [
     {
-        path: '/mypage',
+        path: '/',
         name: 'mypage',
         component: MyPage
     }, 
