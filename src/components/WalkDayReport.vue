@@ -57,13 +57,14 @@ export default {
     background-color: rgb(141, 139, 139);
     position: relative;
     width: inherit;
-    padding: 70px 50px;
+    padding: 40px;
+    height: 1350px;
 }
 
 #dailyreport {
     background-color: rgb(255, 255, 255);
     border-radius: 50px;
-    height: 1300px;
+    height: 1230px;
     padding: 50px 0;
 
 }
@@ -85,8 +86,7 @@ export default {
 .reportbody {
     background-color: rgba(218, 213, 213, 0.893);
     display: block;
-    height: 1200px;
-    margin-top: 20px;
+    height: 1150px;
     padding: 15px;
 }
 .walkfriend {
@@ -131,7 +131,7 @@ export default {
 
 .walk, .kcal, .time, .long {
     flex: 1;
-    background-color:rgb(202, 197, 197);
+    background-color:rgb(228, 228, 228);
     border: 5px solid rgb(142, 141, 141);
 }
 
@@ -151,7 +151,7 @@ export default {
 .walkclose {
     cursor: pointer;
     border : none;
-    background: #01683d;
+    background: #02311e;
     color: white;
     font-size: 30px;
     border-radius: 20px;

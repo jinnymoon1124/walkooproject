@@ -77,15 +77,37 @@ export default {
             document.head.appendChild(script);
         }
     },
+    created() {
+        this.loadKakaoMapAPI();
+    },
     methods: {
+        loadKakaoMapAPI() {
+        const script = document.createElement('script');
+        script.onload = () => this.initMap();
+        script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=YOUR_APP_KEY';
+        document.head.appendChild(script);
+        },
         initMap() {
-            var container = document.getElementById("map");
-            var options = {
-                center: new kakao.maps.LatLng(33.450701, 126.570667),
-                level: 3
-            };
-            var map = new kakao.maps.Map(container, options);
-            map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+            navigator.geolocation.getCurrentPosition(position => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                var container = document.getElementById("map");
+                var options = {
+                    center: new kakao.maps.LatLng(latitude, longitude),
+                    level: 3
+                };
+                var map = new kakao.maps.Map(container, options);
+                map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+
+                const markerPosition = new kakao.maps.LatLng(latitude, longitude);
+                const marker = new kakao.maps.Marker({
+                position : markerPosition
+            });
+            marker.setMap(map);
+            }, error => {
+                console.log(error);
+            })            
         },
         close(event) {
             if(event.target.classList.contains('black-bg') || event.target.classList.contains('close')) {
