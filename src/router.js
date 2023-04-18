@@ -1,7 +1,18 @@
 import { createWebHistory, createRouter } from 'vue-router'
+import MyPage from './components/MyPage.vue'
+import BadgePage from './components/BadgePage.vue'
 
 const routes = [
-
+    {
+        path: '/mypage',
+        name: 'mypage',
+        component: MyPage
+    }, 
+    {
+        path: '/badgepage',
+        name: 'badgepage',
+        component: BadgePage
+    },
 ]
 
 const router = createRouter({

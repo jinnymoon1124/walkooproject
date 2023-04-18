@@ -3,7 +3,11 @@
     <div class="top">
       <div class="top_wrap">
         <div class="top_left">
-          <img class="icon" src="../assets/BadgePage/LeftIcon.png" />
+          <img
+            class="icon"
+            src="../assets/BadgePage/LeftIcon.png"
+            @click="$router.go(-1)"
+          />
         </div>
         <p class="top_center top_name">마이페이지</p>
         <div class="top_right"></div>
@@ -11,11 +15,21 @@
     </div>
     <div class="middle scroller">
       <div class="mainbadge">
-        <div class="mainbadge_main"></div>
+        <div class="MB_main">
+          <div class="MB_top">
+            <p>대표 배지</p>
+          </div>
+          <div class="MB_wrap">
+            <div class="MB_right">
+                <div class=""></div>
+            </div>
+            <div class="MB_left"></div>
+          </div>
+        </div>
       </div>
       <div class="line"></div>
       <div class="badgelist">
-        <div class="badge" v-for="(a, i) in 29" :key="i"></div>
+        <div class="badge" v-for="(a, i) in 29" :key="i">배지 넣을 공간</div>
       </div>
     </div>
     <div class="bottom">홈 바</div>
@@ -98,7 +112,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.mainbadge_main {
+.MB_main {
   width: 89%;
   height: 85%;
 
@@ -106,14 +120,32 @@ export default {
   box-sizing: border-box;
 
   display: flex;
-  justify-content: center;
   align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
 
   padding: 1em;
 
   background: #e2e2e2;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+}
+.MB_top {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.MB_wrap {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.MB_right,
+.MB_left {
+  width: 50%;
+  height: fit-content;
 }
 .line {
   width: 90%;
