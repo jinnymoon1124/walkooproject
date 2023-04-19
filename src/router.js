@@ -12,6 +12,7 @@ import Alarm from "./components/Alarm.vue"
 import WalkMate from "./components/WalkMate.vue"
 import StartPage from "./components/StartPage.vue"
 import FriendAdd from './components/FriendAdd.vue'
+import BadgePage from "./components/BadgePage.vue"
 
 
 
@@ -88,6 +89,12 @@ const routes = [
         path: "/friendadd",
         name: "friendadd",
         component: FriendAdd,
+        meta: { showMenu: true }
+    },
+    {
+        path: "/badgepage",
+        name: "badgepage",
+        component: BadgePage,
         meta: { showMenu: true }
     }
 ]
