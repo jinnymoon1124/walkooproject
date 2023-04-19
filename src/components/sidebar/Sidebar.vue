@@ -88,7 +88,7 @@ export default {
 <style scoped>
 .black-bg {
   width: 750px;
-  height: 1400px;
+  height: 100vh;
   background: rgba(0,0,0,0.5);
   position:absolute; 
   z-index: 4;
@@ -98,7 +98,7 @@ export default {
   border-radius: 8px;
   padding: 70px;
   font-size: 20px;
-  margin: 200px 70px;
+  margin: 20vh 70px;
 
 }
 
@@ -184,20 +184,19 @@ input[type="radio"]:checked + .custom-radio {
 
 .walkingwith {
     background-color: lightgrey;
-    height: 200px;
-    padding: 30px;
+    height: 20vh;
+    padding: 5vh;
 }
 .walkingwith img {
-    width: 120px;
-    padding-left: 30px;
-    
+    width: 120px;  
+    padding-top: 3vh;  
 }
 
 .pink {
-    height: 100px;
+    height: 10vh;
     background-color: rgb(248, 215, 220);
     text-align: center;
-    padding-top: 50px;
+    padding-top: 5vh;
 }
 .pink h2 {
     font-size: 35px;

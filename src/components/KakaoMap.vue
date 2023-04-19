@@ -110,21 +110,21 @@ export default {
 </script>
 
 <style>
-#mappage{ width:inherit;  position:relative; }
+#mappage{ 
+    background-color: #EBEFFF;
+    width:inherit;  
+    position:relative; 
+    height: 100vh;
+}
 p {
     font-weight: bolder;
     letter-spacing: 3px;
 }
 
-/* #mappage {
-    margin: auto;
-    width: 1000px;
-    height: 2000px;
-} */
 #map {
     width: 750px;
     margin:auto;
-    height: 900px;
+    height: 60vh;
     z-index: 1;
 }
 .uptab {
@@ -140,15 +140,15 @@ p {
 
 #walkcontainer {
     width:750px;
-    margin: auto;
-    height: 500px;
+    height: 40vh;
     background-color: rgb(244, 244, 244);
+    padding-top: 30px;
 }
 #pointcontainer {
-    height: 90px;
+    height: 8vh;
 }
 #datacontainer {
-    height: 250px;
+    height: 17vh;
     display: flex;
 }
 
@@ -172,8 +172,7 @@ p {
 
 .timerdata {
     flex : 1;
-    border-left: lightgrey 1px solid;
-    border-right: lightgrey 1px solid;
+    
 }
 
 .distancedata {
@@ -185,11 +184,12 @@ p {
     color: #ffffff;
     border: none;
     display: inline-block;
-    margin: 15px auto;
+    margin: 40px;
     padding: 30px 100px;
     border-radius: 15px;
     font-size: 30px;
-    letter-spacing: 2px;    
+    letter-spacing: 2px; 
+       
 }
 #walkstart:hover {
     background-color: #036439;

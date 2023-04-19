@@ -24,7 +24,7 @@ body {
 }
 
 #app {
-  margin:0 auto; width:750px; min-height:100%; padding-top:71px; border-left:1px #D8D8D8 solid; border-right:1px #D8D8D8 solid; 
+  margin:0 auto; width:750px; min-height:100%; border-left:1px #D8D8D8 solid; border-right:1px #D8D8D8 solid; 
   position: relative; 
   text-align:center;
   font-family: Avenir, Helvetica, Arial, sans-serif;

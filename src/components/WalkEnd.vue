@@ -121,15 +121,14 @@ export default {
 </script>
 
 <style scoped>
-
-body {
-  margin : 0;
-}
-div {
-  box-sizing: border-box;
+#mappage{ 
+    background-color: #EBEFFF;
+    width:inherit;  
+    position:relative; 
+    height: 100vh;
 }
 .black-bg {
-  width: 100%;
+  width: 95%;
   height: 100%;
   background: rgba(0,0,0,0.5);
   position:absolute; 
@@ -141,7 +140,7 @@ div {
   width: 100%; 
   background: white;
   border-radius: 8px;
-  padding: 70px;
+  padding: 70px 0;
   font-size: 20px;
   margin-top: 500px;
 
@@ -198,22 +197,22 @@ p {
 
 
 #map {
-    width: 750px;
+    width: 100%;
     margin:auto;
-    height: 900px;
+    height: 60vh;
     z-index: 1;
 }
 #walkcontainer {
     width:750px;
-    margin: auto;
-    height: 500px;
+    height: 40vh;
     background-color: rgb(244, 244, 244);
+    padding-top: 30px;
 }
 #pointcontainer {
-    height: 90px;
+    height: 8vh;
 }
 #datacontainer {
-    height: 250px;
+    height: 17vh;
     display: flex;
 }
 
@@ -233,8 +232,6 @@ p {
 
 .timerdata {
     flex : 1;
-    border-left: lightgrey 1px solid;
-    border-right: lightgrey 1px solid;
 }
 
 .distancedata {
@@ -246,7 +243,7 @@ p {
     color: #ffffff;
     border: none;
     display: inline-block;
-    margin: 15px auto;
+    margin: 40px;
     padding: 30px 100px;
     border-radius: 15px;
     font-size: 30px;

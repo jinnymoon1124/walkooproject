@@ -58,13 +58,14 @@ export default {
     position: relative;
     width: inherit;
     padding: 40px;
-    height: 1350px;
+    height: 100vh;
 }
 
 #dailyreport {
     background-color: rgb(255, 255, 255);
     border-radius: 50px;
     height: 1230px;
+    margin-top: 1vh;
     padding: 50px 0;
 
 }
