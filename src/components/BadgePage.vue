@@ -1,11 +1,12 @@
 <template>
   <div class="badgepage">
+    <!-- top -->
     <div class="top">
       <div class="top_wrap">
         <div class="top_left">
           <img
             class="icon"
-            src="../assets/BadgePage/LeftIcon.png"
+            src="../assets/LeftIcon.png"
             @click="$router.go(-1)"
           />
         </div>
@@ -13,7 +14,11 @@
         <div class="top_right"></div>
       </div>
     </div>
+
+    <!-- middle -->
     <div class="middle scroller">
+      
+      <!-- 대표 배지 박스 -->
       <div class="mainbadge">
         <div class="MB_main">
           <div class="MB_top">
@@ -29,7 +34,11 @@
           </div>
         </div>
       </div>
+
+      <!-- 중간 줄 -->
       <div class="line"></div>
+
+      <!-- 배지 리스트 -->
       <div class="badgelist">
         <div class="badge" v-for="(a, i) in badgedata" :key="i">
           <div class="badge_img">
@@ -39,6 +48,8 @@
         </div>
       </div>
     </div>
+
+    <!-- bottom -->
     <div class="bottom">홈 바</div>
   </div>
 </template>
@@ -50,7 +61,7 @@ export default {
   name: "MyPage",
   data() {
     return {
-      badgedata: badgedata,
+      badgedata,
     };
   },
 };
