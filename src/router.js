@@ -4,7 +4,6 @@ import KakaoMap from './components/KakaoMap.vue'
 import WalkEnd from './components/WalkEnd.vue'
 import WalkDayReport from './components/WalkDayReport.vue'
 import Loading from './components/Loading.vue'
-import Ranking from "./components/Ranking.vue"
 import FriendList from "./components/FriendList.vue"
 import Store from "./components/Store.vue"
 import MyPage from "./components/MyPage.vue"
@@ -14,6 +13,10 @@ import StartPage from "./components/StartPage.vue"
 import FriendAdd from './components/FriendAdd.vue'
 import BadgePage from "./components/BadgePage.vue"
 
+import Ranking from "./components/rank/Ranking.vue"
+import FamilyRank from './components/rank/FamilyRank.vue'
+import FriendRank from './components/rank/FriendRank.vue'
+import PetRank from './components/rank/PetRank.vue'
 
 
 const routes = [
@@ -95,6 +98,24 @@ const routes = [
         path: "/badgepage",
         name: "badgepage",
         component: BadgePage,
+        meta: { showMenu: true }
+    },
+    {
+        path: '/rank/family',
+        name: 'familyrankpage',
+        component: FamilyRank,
+        meta: { showMenu: true }
+    },
+    {
+        path: '/rank/friend',
+        name: 'frinedrankpage',
+        component: FriendRank,
+        meta: { showMenu: true }
+    },
+    {
+        path: '/rank/pet',
+        name: 'petrankpage',
+        component: PetRank,
         meta: { showMenu: true }
     }
 ]
