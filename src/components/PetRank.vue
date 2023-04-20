@@ -1,4 +1,5 @@
 <template>
+  <div class="rank-head">랭킹</div>
   <div>
     <h3 id="myRank">반려동물 랭킹</h3>
     <div class="arrow-buttons-container">

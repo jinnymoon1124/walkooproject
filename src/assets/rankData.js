@@ -35,10 +35,10 @@ export default[{
     number : 1,
   },{
     familys: [
-        { name: '나', range: '15', time: '34', mate: '12', pet: '8', img : require('@/assets/img1.jpg') },
-        { name: '아빠', range: '15', time: '34', mate: '2', pet: '2', img : require('@/assets/img1.jpg') },
-        { name: '엄마', range: '12', time: '34', mate: '1', pet: '1', img : require('@/assets/img1.jpg') },
-        { name: '동생', range: '3', time: '34', mate: '1', pet: '1', img : require('@/assets/img1.jpg') },
+        { name: '나', range: '18', time: '34', mate: '12', pet: '8', img : require('@/assets/img1.jpg') },
+        { name: '아빠', range: '13', time: '34', mate: '2', pet: '2', img : require('@/assets/img1.jpg') },
+        { name: '엄마', range: '18', time: '34', mate: '1', pet: '1', img : require('@/assets/img1.jpg') },
+        { name: '동생', range: '11', time: '34', mate: '1', pet: '1', img : require('@/assets/img1.jpg') },
     ],
     number : 2,
   },{

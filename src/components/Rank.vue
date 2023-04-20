@@ -1,5 +1,5 @@
 <template>
-  <div>랭킹</div>
+  <div class="rank-head">랭킹</div>
   <div>
     <h3 id="myRank">나의 랭킹</h3>
     <div class="arrow-buttons-container">
@@ -158,6 +158,13 @@ export default {
 </script>
 
 <style>
+/* 페이지 정보*/
+.rank-head {
+  background-color: #687089;
+  padding: 40px 30px 20px 30px;
+  color: #ffffff;
+  font-size: 17px;
+}
 
 /* 페이지 정보 바 */
 #myRank {
@@ -165,6 +172,7 @@ export default {
   background-color: #638263;
   padding: 15px;
   border-radius: 10px;
+  color: #ffffff;
 }
 
 /* 페이지 전체 테두리 */
