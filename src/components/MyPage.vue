@@ -14,13 +14,19 @@
 
     <!-- middle -->
     <div class="middle">
+
+      <!-- middle_1 -->
       <div class="middle_1">
+
+        <!-- 이번 달 사용자 산책 정보 -->
         <div class="user_information_box">
           <p class="user_information">
             누적 산책 거리 : 1KM <br />
             누적 산책 시간 : 1H <br />
             도토리 : 5개
           </p>
+
+          <!-- 캐릭터 수정 버튼 -->
           <div class="user_character_change_box">
             <img
               src="../assets/MyPage/icon_character_change.png"
@@ -28,9 +34,13 @@
             />
           </div>
         </div>
+
+        <!-- 사용자 이름 -->
         <div class="user_name_box">
           <p class="user_name">센치맘이에요^^</p>
         </div>
+
+        <!-- 사용자 캐릭터 -->
         <div class="user_character_box">
           <img
             src="../assets/MyPage/user.png"
@@ -39,33 +49,49 @@
           />
         </div>
 
+        <!-- 알림 버튼 -->
         <div class="alarm_box">
           <img src="../assets/MyPage/icon_alarm.png" alt="알람 아이콘" />
         </div>
       </div>
+
+      <!-- middle_2 -->
       <div class="middle_2">
+
+        <!-- 애완동물 이미지 -->
         <div class="pet_profile">
           <img class="pet_profile_img" src="" alt="" />
         </div>
+
+        <!-- 애완동물 정보 -->
         <div class="pet_status">
+
+          <!-- 애완동물 산책레벨 -->
           <div class="pet_level">LV.1</div>
+          
+          <!-- 애완동물 레벨 바 -->
           <div class="level_progressbar_wrap">
-            <!-- 아래 태그와 주석은 진행바 삽입 후 삭제 -->
-            <div style="color: red">진행률 바</div>
+            <div class="level_progressbar" style="width: 69%"></div>
           </div>
         </div>
       </div>
+
+      <!-- middle_3 -->
       <div class="middle_3">
         <div><p>배지</p></div>
         <div><p>산책기록</p></div>
       </div>
+
+      <!-- middle_4 -->
       <div class="middle_4">
+
+        <!-- 배지 버튼 -->
         <div class="middle_4_wrap">
           <div class="btn_wrap btn_badge" @click="$router.push('./badgepage')">
             <img
               class="icon"
               src="../assets/MyPage/icon_badge.png"
-              alt="뱃지 아이콘"
+              alt="배지"
             />
           </div>
           <div class="btn_text">
@@ -73,12 +99,14 @@
             설정해 보세요!
           </div>
         </div>
+
+        <!-- 산책 기록 버튼 -->
         <div class="middle_4_wrap">
-          <div class="btn_wrap btn_badge">
+          <div class="btn_wrap btn_badge" @click="$router.push('./walkrecordpage')">
             <img
               class="icon"
               src="../assets/MyPage/icon_calendar.png"
-              alt="뱃지 아이콘"
+              alt="산책기록"
             />
           </div>
           <div class="btn_text">
@@ -87,36 +115,46 @@
           </div>
         </div>
       </div>
+
+      <!-- middle_5 -->
       <div class="middle_5">
         <div><p>설정</p></div>
       </div>
+
+      <!-- middle_6 -->
       <div class="middle_6">
+
+        <!-- 공지사항 버튼 -->
         <div class="middle_6_wrap">
           <div class="btn_wrap btn_badge">
             <img
               class="icon"
               src="../assets/MyPage/icon_badge.png"
-              alt="뱃지 아이콘"
+              alt="공지사항"
             />
           </div>
           <div class="btn_text">공지사항</div>
         </div>
+
+        <!-- 고객센터 버튼 -->
         <div class="middle_6_wrap">
           <div class="btn_wrap btn_badge">
             <img
               class="icon"
               src="../assets/MyPage/icon_calendar.png"
-              alt="뱃지 아이콘"
+              alt="고객센터"
             />
           </div>
           <div class="btn_text">고객센터</div>
         </div>
+
+        <!-- 설정 버튼 -->
         <div class="middle_6_wrap">
           <div class="btn_wrap btn_badge">
             <img
               class="icon"
               src="../assets/MyPage/icon_calendar.png"
-              alt="뱃지 아이콘"
+              alt="설정"
             />
           </div>
           <div class="btn_text">설정</div>
@@ -125,7 +163,8 @@
     </div>
 
     <!-- bottom -->
-    <div class="bottom">홈 바</div>
+    <!-- 하단 바 들어갈 자리 -->
+    <div class="bottom">Menu</div>
   </div>
 </template>
 
@@ -364,11 +403,33 @@ export default {
 .mypage .pet_status {
   padding-left: 1em;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .mypage .pet_level {
   font-size: 1.2rem;
   font-weight: bold;
   color: #747474;
+}
+.mypage .level_progressbar_wrap {
+  width: 100%;
+  height: auto;
+  background-color: #dedede;
+}
+.mypage .level_progressbar {
+  height: 3vw;
+  background-color: #638263;
+  animation-name: pet_level_ani;
+  animation-duration: 3s;
+}
+@keyframes pet_level_ani {
+  0% {
+    width: 0%;
+  }
+  100% {
+  }
 }
 .mypage .middle_4_wrap {
   width: 50%;
