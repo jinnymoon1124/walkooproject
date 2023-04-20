@@ -31,7 +31,12 @@
       </div>
       <div class="line"></div>
       <div class="badgelist">
-        <div class="badge" v-for="(a, i) in 29" :key="i">배지 넣을 공간</div>
+        <div class="badge" v-for="(a, i) in badgedata" :key="i">
+          <div class="badge_img">
+            <img :src="a.img" />
+          </div>
+          <div class="badge_name">{{ a.name }}</div>
+        </div>
       </div>
     </div>
     <div class="bottom">홈 바</div>
@@ -39,8 +44,15 @@
 </template>
 
 <script>
+import badgedata from "../assets/BadgeData.js";
+
 export default {
   name: "MyPage",
+  data() {
+    return {
+      badgedata: badgedata,
+    };
+  },
 };
 </script>
 
@@ -201,10 +213,40 @@ export default {
   flex-wrap: wrap;
 }
 .badgepage .badge {
-  width: 25%;
+  width: 30%;
   height: 29%;
-  background: #bcbcbc;
-  margin: 10px;
+  margin: 1%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.badgepage .badge_img {
+  width: 20vw;
+  height: 20vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f2ee;
+  border-radius: 100%;
+}
+.badgepage .badge_img img {
+  width: 45%;
+  height: auto;
+}
+.badgepage .badge_name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 4vw;
+  text-align: center;
+  letter-spacing: -0.32px;
+  color: #747474;
+
+  padding: 2vw 0;
 }
 .badgepage .bottom {
   position: relative;
