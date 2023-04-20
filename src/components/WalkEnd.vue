@@ -4,7 +4,7 @@
         <!-- 산책종료할건지 확인 모달창 -->
     <div class="black-bg" v-if="openModal == true">
         <div class="white-bg">
-            <h2>산책을 종료하겠습니까?</h2>
+            <h2>산책을 마칠까요?</h2>
             <button class="quit" @click="$router.push('./walkdayreport')">확인</button>
             <button class="close" @click="openModal = false">취소</button>
         </div>
@@ -149,7 +149,6 @@ export default {
     z-index: 2;
     height: 50px;
     position: absolute;
-    margin-left: 100px;
 }
 .uptab img {
     width: 100px;
@@ -158,19 +157,19 @@ export default {
 .quit {
     cursor: pointer;
     border : none;
-    background: #6667AB;
+    background: #005d35;
     color: white;
     font-size: 30px;
-    font-weight: bold;
+
     border-radius: 5px;
     padding: 20px 80px;
     margin: 20px;
 }
 .quit:hover {
-    background-color: rgba(182, 10, 10, 0.63);
+    box-shadow: inset 0 0 0 5px darkgreen;
     font-weight: bold;
     transform: scale(1, 1);
-    transition: all 0.5s
+    transition: all 0.3s
 }
 .close {
     cursor: pointer;
@@ -187,7 +186,7 @@ export default {
     color: white;
     font-weight: bold;
     transform: scale(1, 1);
-    transition: all 0.5s
+    transition: all 0.3s
 }
 
 p {

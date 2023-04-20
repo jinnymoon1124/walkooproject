@@ -43,13 +43,13 @@
             <div class="friend1">
                 <i class="fa-regular fa-user fa-2xl fa-pull-left"></i>
                 <button type="button" id="sendwith" @click="openModal = true">+</button>
-
                 <p>효진</p>
             </div>
             <div class="friend2">
                 <i class="fa-regular fa-user fa-2xl fa-pull-left"></i>
-                <button type="button" id="sendwith" @click="openModal = true">+</button>
                 <p>센치</p>
+                <button type="button" id="sendwith" @click="openModal = true">+</button>
+
             </div>
         </div>
     </span>
@@ -61,8 +61,6 @@
     <i class="fa-regular fa-circle-xmark fa-2xl"></i>
 
     </span>
-
-
   </div>
 </template>
 
@@ -92,6 +90,8 @@ export default {
   background: rgba(0,0,0,0.5);
   position:absolute; 
   z-index: 4;
+  left: -250px;
+
 }
 .white-bg {
   background: rgb(255, 255, 255);
@@ -160,11 +160,11 @@ input[type="radio"]:checked + .custom-radio {
 
 .sidebar {
     background-color: rgb(255, 255, 255);
-    float:left;
-    position: absolute;
+    float:right;
+    position:absolute;
     z-index: 3;
     top: 0;
-    left: 0;
+    right: 0;
     bottom: 0;
     transition: 0.3s ease;
     display:flex;

@@ -163,6 +163,6 @@ export default {
     background-color: rgba(182, 10, 10, 0.63);
     font-weight: bold;
     transform: scale(1, 1);
-    transition: all 0.5s
+    transition: all 0.3s
 }
 </style>

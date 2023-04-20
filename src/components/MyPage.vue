@@ -304,8 +304,9 @@ data() {
   align-items: center;
 }
 .mypage .middle_4_wrap:hover {
-  border:1px solid lightgrey;
-  transition: all 0.3s;
+  box-shadow: inset 0 0 0 2px darkolivegreen;
+  border-radius: 70px;
+  transition: all 0.1s;
 }
 .mypage .middle_4_wrap .btn_wrap {
   width: 90px;
@@ -381,8 +382,9 @@ data() {
   cursor: pointer;
 }
 .mypage .middle_6_wrap:hover {
-  border:1px solid lightgrey;
-  transition: all 0.3s;
+  box-shadow: inset 0 0 0 2px darkolivegreen;
+  border-radius: 70px;
+  transition: all 0.1s;
 }
 .mypage .middle_6_wrap .btn_wrap .icon {
   width: 60%;

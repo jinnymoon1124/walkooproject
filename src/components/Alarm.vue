@@ -30,7 +30,7 @@ data() {
 });
 </script>
 
-<style>
+<style scoped>
 .pg_alarm {
   font-weight: bold;
   font-size: 50px;

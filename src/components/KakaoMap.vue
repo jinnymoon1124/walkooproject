@@ -1,14 +1,26 @@
 <template>
   
   <div id="mappage">
-    <Sidebar />
-        <div :style="{ 'margin-left' : sidebarHeight, sidebarWidth }">
+
+    <!-- 산책종료할건지 확인 모달창 -->
+    <div class="black-bg" v-if="openModal == true">
+        <div class="white-bg">
+            <h2>산책을 취소할까요?</h2>
+            <button class="yes" @click="$router.push('/')">확인</button>
+            <button class="no" @click="openModal = false">취소</button>
+        </div>
+    </div>
+
+    <Sidebar  />
+        <div :style="{ 'margin-right' : sidebarHeight, sidebarWidth }">
             <router-view />
         </div>    
     <div id="map">        
         <div class="uptab">
-            <img src="../assets/person1.png">
-            <img src="../assets/person2.png">
+            <img src="@/assets/backbutton.png" class="goBack" @click="openModal = true"/>
+
+            <img class="imwith"  src="../assets/person1.png">
+            <img class="imwith" src="../assets/person2.png">
         </div>
     </div>
     <div id= "walkcontainer">
@@ -53,6 +65,7 @@ export default {
     data() {
         return {
             map : null,
+            openModal : false,
         };
     },
     mounted() {
@@ -109,7 +122,74 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.black-bg {
+  width: 95%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  position:absolute; 
+  padding: 20px;
+  z-index: 4;
+
+}
+.white-bg {
+  width: 100%; 
+  background: white;
+  border-radius: 8px;
+  padding: 70px 0;
+  font-size: 20px;
+  margin-top: 500px;
+
+} 
+
+.yes {
+    cursor: pointer;
+    border : none;
+    background: #7a0317;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 20px 80px;
+    margin: 20px;
+}
+.yes:hover {
+    background-color: rgba(182, 10, 10, 0.63);
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.3s
+}
+
+.no {
+    cursor: pointer;
+    border : none;
+    background: #cacaca;
+    color: rgb(67, 67, 67);
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 20px 80px;
+    margin: 10px 20px;
+}
+.no:hover {
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.3s
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #mappage{ 
     background-color: #EBEFFF;
     width:inherit;  
@@ -119,6 +199,14 @@ export default {
 p {
     font-weight: bolder;
     letter-spacing: 3px;
+}
+
+.goBack {
+    float: left;
+    width:60px;
+    background-color:rgb(255, 255, 255);
+    margin-top: 35px;
+    border-radius: 20px;
 }
 
 #map {
@@ -131,11 +219,10 @@ p {
     z-index: 2;
     height: 50px;
     position: absolute;
-    margin-left: 100px;
 }
-.uptab img {
+.imwith {
     width: 100px;
-    margin: 0 10px;
+    margin: 10px;
 }
 
 #walkcontainer {
