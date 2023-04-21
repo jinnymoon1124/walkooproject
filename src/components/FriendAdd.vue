@@ -116,7 +116,7 @@ data() {
 
 </script>
 
-<style>
+<style scoped>
 #friendaddpg {
     height: 100vh;
 }

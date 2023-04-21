@@ -5,25 +5,25 @@
         <div class="white-bg">
             <h2>[효진]에게 산책 동행 신청을 보낼까요?</h2>
             <label>
-                <input type="radio" name="option" value="1">
+                <input type="radio" name="option" value="1" ref="value1">
                 <span class="custom-radio"></span>
                 사람끼리만 산책해요!
             </label>
             
             <label>
-                <input type="radio" name="option" value="2">
+                <input type="radio" name="option" value="2" ref="value2">
                 <span class="custom-radio"></span>
                 반려동물과 함께해요!
             </label>
             <label>
-                <input type="radio" name="option" value="3">
+                <input type="radio" name="option" value="3" ref="value3">
                 <span class="custom-radio"></span>
                 상관없어요~
             </label>
             <br>
 
             <button class="send" @click="openModal = false">보내기</button>
-            <button class="close" @click="openModal = false">취소</button>
+            <button class="close" @click="openModal = false ">취소</button>
         </div>
     </div>
     
@@ -77,6 +77,13 @@ export default {
             openModal : false,
             selectedButton : null,
         };
+    },
+    methods: {
+        hideChecked() {
+            this.$refs.radio1.checked = false; 
+            this.$refs.radio2.checked = false; 
+            this.$refs.radio3.checked = false;
+        },
     },
     
 }
