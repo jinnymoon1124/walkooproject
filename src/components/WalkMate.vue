@@ -14,10 +14,10 @@
       </div>
     </div>
     <div class="container">
-      <div class="box">
-        <div v-for="(person, index) in selectedCircles" :key="index" class="circle-img circle">
-          <img :src="person.image" :alt="person.name" />
-        <div class="name">{{ person.name }}</div>
+      <div class="box" ref="box">
+        <div v-for="index in selectedCircles" :key="index" class="circle-img circle">
+          <img :src="getPerson(index).image" :alt="getPerson(index).name" />
+          <div class="name">{{ getPerson(index).name }}</div>
         </div>
       </div>
     </div>
@@ -135,32 +135,37 @@ export default defineComponent({
   },
   methods: {
     selectCircle(index) {
-  if (this.selectedCircles.length >= 5) {
-    alert("더 이상 선택할 수 없습니다.");
-    this.selectedCircles = []; 
-    return;
-  }
-  
-  if (this.selectedCircles.includes(index)) {
-    const i = this.selectedCircles.indexOf(index);
-    if (i > -1) {
-      this.selectedCircles.splice(i, 1);
-    }
-  } else {
-    this.selectedCircles.push(index);
-  }
-  
-},
+      if (this.selectedCircles.length >= 5) {
+        alert("더 이상 선택할 수 없습니다.");
+        this.selectedCircles = []; 
+        return;
+      }
+      if (this.selectedCircles.includes(index)) {
+        const i = this.selectedCircles.indexOf(index);
+        if (i > -1) {
+          this.selectedCircles.splice(i, 1);
+        }
+      } else {
+        this.selectedCircles.push(index);
+      }
+    },
     removeCircle(index) {
       const i = this.selectedCircles.indexOf(index);
       if (i > -1) {
         this.selectedCircles.splice(i, 1);
       }
     },
+    getPerson(index) {
+      if (index < this.peopleFamily.length) {
+        return this.peopleFamily[index];
+      } else {
+        return this.peopleFriends[index - this.peopleFamily.length];
+      }
+    }
   },
   watch: {
   selectedCircles(newVal) {
-    const box = document.querySelector(".box");
+    const box = this.$refs.box;
     if (newVal.length === 0) {
       return;
     }
@@ -183,7 +188,7 @@ export default defineComponent({
       box.appendChild(circle);
     }
   },
-},
+  },
 });
 
 </script>
@@ -252,7 +257,7 @@ h1 {
 }
 
 .box {
-  background-color: rgb(132, 132, 132);
+  background-color: rgb(184, 183, 183);
   height: 300px;
   width: 100%;
   max-width: 750px;
