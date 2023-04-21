@@ -3,11 +3,29 @@
     <div class="header">
       <img src="@/assets/backbutton.png" alt="backButton" class="back-button" @click = "goBack"/>
       <div class= "myfriend">친구 추가</div>
-      
 
-        <button class="friendadd-button" @click="$router.push('/pg_friendadd2')">아이디로 <br/>친구추가</button>
+            <!-- 아이디를 입력하라는 모달창 -->
+    <div class="black-bg" v-if="openModal == true">
+        <div class="white-bg">
+            <h2>친구의 ID를 입력하세요!</h2>
+            <input type="text" class="textfield">
+            <button class="ok" @click="$router.push('./walkdayreport')">확인</button><br><br>
+          <img src="../assets/friendimage/ujin2.png" class="image">
         
+            
+            <p> " 유진 "님이 발견되었습니다! <br> 추가하시겠습니까?</p>
+            <button class="reject" @click="openModal = false">거절</button>
+            <button class="accept" @click="openModal = false">수락</button>
+        </div>
+    </div>
 
+        <div>
+          <button class="friendadd-button" @click="openModal= true">아이디로<br/>친구추가</button>
+        </div>
+  </div>
+        
+      
+    
     </div>
     
     <div class="friend-list-box">
@@ -19,10 +37,11 @@
           <div class="friend-info">
             <img src="@/assets/addfriendbutton.png" alt="addfriendbutton" class="addfriend-button" />
           </div>
-          </div>
         </div>
       </div>
     </div>
+    
+  
 </template>
 
 <script>
@@ -33,6 +52,7 @@ export default {
 
   setup() {
     const router = useRouter();
+    
 
     function goBack() {
       router.go(-1);
@@ -53,11 +73,13 @@ export default {
     goTofriendidadd() {
       this.$router.push("/pg_friendadd2");
     },
-    
+   
     
   },
   data() {
     return {
+      openModal : false,
+     
       friends: [
         {
           id: 1,
@@ -116,6 +138,7 @@ export default {
   margin: 0;
   font-size: 100;
 }
+
 .friend-list-box {
   width: 90%;
   height: 100%;
@@ -130,6 +153,7 @@ export default {
   border-radius: 10px;
   margin-left: 36px;
 }
+
 .friend-list {
   display: block;
   margin: 0;
@@ -146,12 +170,13 @@ export default {
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
 }
+
 .friend:last-child {
   margin-bottom: 0;
   border-bottom: none;
 }
 
-.friend-image {
+.image {
   width: 50%;
   height: auto;
   border-radius: 50%;
@@ -172,18 +197,7 @@ export default {
 
 .walkrq-button {
   margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #dcdada;
-  border: none;
-  border-radius: 5px;
-  color: #4a4a4a;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-left: 430px;
-}
-.friendadd-button {
-  margin-top: 10px;
-  margin-left: 500px;
+  margin-left: 380px; /* 수정된 값 */
   padding: 5px 10px;
   background-color: #dcdada;
   border: 5;
@@ -192,12 +206,20 @@ export default {
   font-size: 1rem;
   cursor: pointer;
   border-radius: 60px;
+}
+
+.addfriend-button {
+  margin-top: 100;
+  margin-left: 380px;
+  padding: 5px 10px;
+  background-color: #dcdada;
+  cursor: pointer;
+  border-radius: 60px;
 
 }
 
 .box{
   box-sizing: border-box;
-
   position: absolute;
   width: 357px;
   height: 613px;
@@ -209,5 +231,57 @@ export default {
   border-radius: 18px;
 }
 
+.black-bg {
+  width: 95%;
+  height: 200%;
+  background: rgba(0,0,0,0.5);
+  position:absolute; 
+  padding: 20px;
+  z-index: 4;
+
+}
+.white-bg {
+  width: 60%; 
+  background: rgb(235, 233, 232);
+  border-radius: 30px;
+ 
+  padding: 70px;
+  font-size: 20px;
+  margin-top: 1000px;
+  margin-left: 68px;
+}
+.ok{
+  border-radius: 8px;
+  margin-left: 10px;
+  width :60px;
+  height : 40px;
+}
+
+.textfield {
+  border-radius: 8px;
+  width :300px;
+  height : 35px;
+}
+
+.reject {
+
+  padding: 10px 60px;
+  background-color: #7a7878;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.accept{
+  padding: 10px 60px;
+  background-color: #585757;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  font-size: 2rem;
+  margin-left: 10px;
+}
 
 </style>
