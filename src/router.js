@@ -12,6 +12,8 @@ import WalkMate from "./components/WalkMate.vue"
 import StartPage from "./components/StartPage.vue"
 import FriendAdd from './components/FriendAdd.vue'
 import BadgePage from "./components/BadgePage.vue"
+import WalkRecord from "./components/WalkRecord.vue"
+
 
 import Ranking from "./components/rank/Ranking.vue"
 import FamilyRank from './components/rank/FamilyRank.vue'
@@ -117,7 +119,14 @@ const routes = [
         name: 'petrankpage',
         component: PetRank,
         meta: { showMenu: true }
+    },
+    {
+        path: '/walkrecord',
+        name: 'walkrecord',
+        component: WalkRecord,
+        meta: { showMenu: true }
     }
+
 ]
 
 const router = createRouter({

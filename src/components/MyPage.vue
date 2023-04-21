@@ -33,7 +33,7 @@
             <div class="pet_level">LV.1</div>
             <div class="level_progressbar_wrap">
               <!-- 아래 태그와 주석은 진행바 삽입 후 삭제 -->
-              <div style="color: red">진행률 바</div>
+              <div class="level_progressbar" style="width:69%"></div>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
             </div>
           </div>
           <div class="middle_4_wrap">
-            <div class="btn_wrap btn_badge">
+            <div class="btn_wrap btn_badge" @click="$router.push('./walkrecord')">
               <img class="icon" src="../assets/MyPage/icon_calendar.png" />
             </div>
             <div class="btn_text">
@@ -302,6 +302,24 @@ data() {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.mypage .level_progressbar_wrap {
+  width: 100%;
+  height: auto;
+  background-color: #dedede;
+}
+.mypage .level_progressbar {
+  height: 3vw;
+  background-color: #638263;
+  animation-name: pet_level_ani;
+  animation-duration: 3s;
+}
+@keyframes pet_level_ani {
+  0% {
+    width: 0%;
+  }
+  100% {
+  }
 }
 .mypage .middle_4_wrap:hover {
   box-shadow: inset 0 0 0 2px darkolivegreen;
