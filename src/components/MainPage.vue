@@ -4,7 +4,7 @@
       <h3>나희네 가족들</h3>
     </div>
 
-    <img src="../assets/familyimg.jpg">
+    //<img src="../assets/familyimg.jpg">
     
     <div>
       <button id="walkstart" > 산책시작 </button>
