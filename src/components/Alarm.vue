@@ -1,7 +1,7 @@
 <template>
     <div>
     <div class="pg_alarm">
-      <img src="@/assets/backbutton.png" alt="backButton" class="back-button" @click="$router.push('/pg_MainPage')"/>
+      <img src="@/assets/backbutton.png" alt="backButton" class="back-button" @click="$router.push('/')"/>
       알림이 왔어요!<br>
     </div>
     <div v-if="showBanner" class="banner" >

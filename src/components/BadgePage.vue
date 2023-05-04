@@ -25,11 +25,17 @@
             <p>대표 배지</p>
           </div>
           <div class="MB_wrap">
-            <div class="MB_left">
-              <img class="mainbadge_img" src alt="메인배지" />
+            <!-- mainBadgeIndex 값이 있는 경우에만 해당 배지 정보를 보여줍니다 -->
+            <div v-if="mainBadgeIndex !== null" class="MB_left">
+              <img class="mainbadge_img" :src="badgedata[mainBadgeIndex].img" />
+            </div>
+            <div v-else class="MB_left">
+              <img class="mainbadge_img" src alt="" />
             </div>
             <div class="MB_right">
-              <p>대표 배지를<br />설정해 보세요!</p>
+              <!-- mainBadgeIndex 값이 있는 경우 해당 배지 이름을 보여줍니다 -->
+              <p v-if="mainBadgeIndex !== null">{{ badgedata[mainBadgeIndex].name }}</p>
+              <p v-else>대표 배지를<br />설정해 보세요!</p>
             </div>
           </div>
         </div>
@@ -40,7 +46,8 @@
 
       <!-- 배지 리스트 -->
       <div class="badgelist">
-        <div class="badge" v-for="(a, i) in badgedata" :key="i">
+        <!-- BadgeList 템플릿의 badge 요소에서 @click 메서드를 호출 -->
+        <div class="badge" v-for="(a, i) in badgedata" :key="i" @click="setMainBadge(i)">
           <div class="badge_img">
             <img :src="a.img" />
           </div>
@@ -60,7 +67,13 @@ export default {
   data() {
     return {
       badgedata,
+      mainBadgeIndex: null,
     };
+  },
+  methods: {
+    setMainBadge(index) {
+      this.mainBadgeIndex = index;
+    },
   },
 };
 </script>
@@ -186,7 +199,7 @@ export default {
   height: 150px;
   background-color: #fefefe;
   border-radius: 100%;
-  margin: 5px 50px 5px 0px;
+  margin: -30px 60px 10px 0px;
 
 }
 .badgepage .MB_right {
@@ -199,8 +212,8 @@ export default {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 21px;
+  font-size: 30px;
+  line-height: 35px;
   /* or 105% */
 
   text-align: center;
@@ -223,7 +236,7 @@ export default {
 }
 .badgepage .badge {
   width: 30%;
-  height: 29%;
+  height: 30%;
   margin: 1%;
 
   display: flex;
@@ -243,7 +256,7 @@ export default {
   border-radius: 100%;
 }
 .badgepage .badge_img img {
-  width: 50px;
+  width: 60px;
 
 }
 .badgepage .badge_name {
@@ -255,7 +268,13 @@ export default {
   letter-spacing: -0.32px;
   color: #747474;
 
-  padding: 2vw 0;
+  padding: 0.5vw 0;
+}
+
+.mainbadge_img {
+  width: 150px;
+  height: 150px;
+  padding: 20px;
 }
 
 </style>
