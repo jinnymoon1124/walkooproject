@@ -33,8 +33,10 @@
                 <div class="todaydata_2">
                     <div class="time">
                         <img src="../assets/timericon.png">
-                        <p>0 시간 0 분</p>
+                        <p>{{ totalTime }}</p>
+                        <KakaoMap />
                     </div>
+                    
                     <div class="long">
                         <img src="../assets/distanceicon.png">
                         <p>0 KM</p>
@@ -48,7 +50,28 @@
 
 <script>
 export default {
-}
+  name: 'WalkDayReport',
+  data() {
+    return {
+      timeData: {
+        min: 0,
+        seconds: 0
+      }
+    };
+  },
+  mounted() {
+    this.timeData = {
+      min: parseInt(this.$route.query.min),
+      seconds: parseInt(this.$route.query.seconds)
+    };
+    console.log('timeData:', this.timeData);
+  },
+  computed: {
+    totalTime() {
+      return `${this.timeData.min.toString().padStart(2, '0')}:${this.timeData.seconds.toString().padStart(2, '0')}`;
+    }
+  }
+};
 </script>
 
 <style scoped>

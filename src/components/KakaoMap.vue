@@ -1,13 +1,22 @@
 <template>
   
   <div id="mappage">
-
-    <!-- 산책종료할건지 확인 모달창 -->
-    <div class="black-bg" v-if="openModal == true">
+    
+    <!-- 산책취소할건지 확인 모달창 -->
+    <div class="black-bg" v-if="openModal1 == true">
         <div class="white-bg">
             <h2>산책을 취소할까요?</h2>
             <button class="yes" @click="$router.push('/')">확인</button>
-            <button class="no" @click="openModal = false">취소</button>
+            <button class="no" @click="openModal1 = false">취소</button>
+        </div>
+    </div>
+
+    <!-- 산책종료할건지 확인 모달창 -->
+    <div class="black-bg" v-if="openModal2 == true">
+        <div class="white-bg">
+            <h2>산책을 마칠까요?</h2>
+            <button class="quit" @click="stopTimerAndNavigate">확인</button>
+            <button class="close" @click="closeModal">취소</button>
         </div>
     </div>
 
@@ -17,7 +26,7 @@
         </div>    
     <div id="map">        
         <div class="uptab">
-            <img src="@/assets/backbutton.png" class="goBack" @click="openModal = true"/>
+            <img src="@/assets/backbutton.png" class="goBack" @click="openModal1 = true"/>
 
             <img class="imwith"  src="../assets/person1.png">
             <img class="imwith" src="../assets/person2.png">
@@ -38,7 +47,7 @@
             </div>
             <div class="timerdata">
                 <img src="../assets/timericon.png">
-                <p>0 시간 0 분</p>
+                <p>{{ formatTime(timer) }}</p>
             </div>
             <div class="distancedata">
                 <img src="../assets/distanceicon.png">
@@ -46,7 +55,13 @@
             </div>
         </div>
 
-        <button type="button" id="walkstart" @click="$router.push('./walkend')">산책시작</button>
+        <button 
+            type="button" 
+            :class="{'walkstart': !isWalking, 'walkend' : isWalking }" 
+            @click="toggleTimer">
+            {{ isWalking ? 'Stop' : 'Start' }}
+            
+        </button>
     </div>
   </div>
 </template>
@@ -54,10 +69,13 @@
 <script>
 import Sidebar from './sidebar/Sidebar.vue'
 import { sidebarWidth, sidebarHeight } from './sidebar/state';
+import WalkDayReport from './WalkDayReport.vue';
 
 export default {
+    name: 'KakaoMap',
     components: {
-        Sidebar
+        Sidebar,
+        WalkDayReport,
     },
     setup() {
         return {sidebarWidth , sidebarHeight}
@@ -65,7 +83,11 @@ export default {
     data() {
         return {
             map : null,
-            openModal : false,
+            openModal1 : false,
+            openModal2 : false,
+            timer : 0,
+            isWalking : false,
+            timerId : null,
         };
     },
     mounted() {
@@ -85,39 +107,74 @@ export default {
         loadKakaoMapAPI() {
         const script = document.createElement('script');
         script.onload = () => this.initMap();
-        script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=YOUR_APP_KEY';
+        script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}`;
         document.head.appendChild(script);
         },
         initMap() {
-            navigator.geolocation.getCurrentPosition(position => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-            
-
-                var container = document.getElementById("map");
-                var options = {
-                    center: new kakao.maps.LatLng(latitude, longitude),
-                    level: 3
-                };
-                var map = new kakao.maps.Map(container, options);
-
-                var imageSrc = "https://ibb.co/5r8NTC2",
-                    imageSize = new kakao.maps.Size(64, 69),
-                    imageOption = {offset: new kakao.maps.Point(27, 69)};
-
-                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                    markerPosition = new kakao.maps.LatLng(latitude, longitude);
-
-                var marker = new kakao.maps.Marker({
-                    position: markerPosition,
-                    image: markerImage
-                });
-                
-            marker.setMap(map);
-            }, error => {
-                console.log(error);
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const {latitude, longitude } = position.coords;
+                    const mapOptions = {
+                        center: new kakao.maps.LatLng(latitude, longitude),
+                        level: 3,
+                        MapTypeId: kakao.maps.MapTypeId.ROADMAP
+                    };                   
+                    const map = new kakao.maps.Map(document.getElementById('map'),mapOptions);
+                    
+                    const marker = new kakao.maps.Marker({
+                        position: new kakao.maps.LatLng(latitude, longitude),
+                        map,
+                    });
+                }, error => {
+                    console.log(error);
+            }) 
+        },
+        startTimer() {
+            this.timerId = setInterval(() => {
+                this.timer += 1
+            }, 1000)
+            this.isWalking = true
+        },
+        stopTimer() {
+            clearInterval(this.timerId)
+            this.timerId = null
+            this.isWalking = false
+        },
+        stopTimerAndNavigate() {
+            this.stopTimer();
+            const timeData = { 
+                min: Math.floor(this.timer / 60), 
+                seconds: this.timer % 60 
+            };
+            console.log('timeData:', timeData);
+            this.$router.push({ 
+                name: 'WalkDayReport', 
+                query : {
+                    min: timeData.min,
+                    seconds: timeData.seconds
+                }
             });
-        }
+        },
+        toggleTimer() {
+            if ( this.isWalking ) {
+                this.stopTimer()
+                this.openModal2 = true
+            } else {
+                this.startTimer()
+            }
+        },
+        closeModal() {
+            this.openModal2 = false
+            this.startTimer()
+        },
+        formatTime ( seconds ) {
+            const min = Math.floor(seconds / 60)
+            const remainingSeconds = seconds % 60
+            return `${min.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+        },
+        destroyed() {
+            this.stopTimer()
+        },
     }
 };
 </script>
@@ -178,18 +235,6 @@ export default {
     transform: scale(1, 1);
     transition: all 0.3s
 }
-
-
-
-
-
-
-
-
-
-
-
-
 #mappage{ 
     background-color: #EBEFFF;
     width:inherit;  
@@ -266,7 +311,7 @@ p {
     flex : 1;
 }
 
-#walkstart {
+.walkstart {
     background-color: #77af9c;
     color: #ffffff;
     border: none;
@@ -278,11 +323,64 @@ p {
     letter-spacing: 2px; 
        
 }
-#walkstart:hover {
+.walkstart:hover {
     background-color: #036439;
     color: white;
     font-weight: bold;
     transform: scale(1, 1);
     transition: all 0.5s
+}
+
+.walkend {
+    background-color: #b40617;
+    color: #ffffff;
+    border: none;
+    display: inline-block;
+    margin: 40px;
+    padding: 30px 100px;
+    border-radius: 15px;
+    font-size: 30px;
+    letter-spacing: 2px;    
+}
+.walkend:hover {
+    background-color: #790511;
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.5s
+}
+.quit {
+    cursor: pointer;
+    border : none;
+    background: #005d35;
+    color: white;
+    font-size: 30px;
+
+    border-radius: 5px;
+    padding: 20px 80px;
+    margin: 20px;
+}
+.quit:hover {
+    box-shadow: inset 0 0 0 5px darkgreen;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.3s
+}
+.close {
+    cursor: pointer;
+    border : none;
+    background: #cacaca;
+    color: rgb(67, 67, 67);
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 20px 80px;
+    margin: 10px 20px;
+}
+.close:hover {
+    color: white;
+    font-weight: bold;
+    transform: scale(1, 1);
+    transition: all 0.3s
 }
 </style>

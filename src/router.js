@@ -1,3 +1,4 @@
+
 import { createWebHistory, createRouter } from 'vue-router'
 import MainPage from './components/MainPage.vue'
 import KakaoMap from './components/KakaoMap.vue'
@@ -21,6 +22,7 @@ import FriendRank from './components/rank/FriendRank.vue'
 import PetRank from './components/rank/PetRank.vue'
 
 
+
 const routes = [
     {
         path: '/',
@@ -40,7 +42,9 @@ const routes = [
     },
     {
         path: '/walkdayreport',
+        name: 'WalkDayReport',
         component: WalkDayReport,
+        props: (route) => ({ timeData: route.params.timeData }),
         meta: { showMenu: false }
     },
     {
@@ -134,4 +138,4 @@ const router = createRouter({
     routes
 })
 
-export default router
+export default router;
