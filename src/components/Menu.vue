@@ -61,6 +61,7 @@ export default {
 <style>
 
 .menu-container {
+
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -69,7 +70,7 @@ export default {
 }
 
 .menu-item {
-  width: 150px;
+  width: 10vw;
   height: 80px;
   display: flex;
   flex-direction: column;

@@ -58,7 +58,7 @@ export default defineComponent({
   background-color: #EBEFFF;
   display: flex;
   flex-direction: column;
-  max-width: 750px;
+
   margin: 0 auto;
   height: 96vh; /* 화면 높이를 100vh로 설정 */
   overflow-y: auto; /* 스크롤이 생기도록 설정 */

@@ -51,7 +51,7 @@
             </div>
             <div class="distancedata">
                 <img src="../assets/distanceicon.png">
-                <p>0 KM</p>
+                <p>{{ distance.toFixed(10) }}</p>
             </div>
         </div>
 
@@ -60,7 +60,6 @@
             :class="{'walkstart': !isWalking, 'walkend' : isWalking }" 
             @click="toggleTimer">
             {{ isWalking ? 'Stop' : 'Start' }}
-            
         </button>
     </div>
   </div>
@@ -88,6 +87,9 @@ export default {
             timer : 0,
             isWalking : false,
             timerId : null,
+            distance : 0, // Keep track of total distance
+            watchId: null,
+
         };
     },
     mounted() {
@@ -115,6 +117,30 @@ export default {
             let marker;
             let previousPosition;
             let polyline;
+            let distance = 0;
+            let watchId;
+            
+            function degreesToRadians(degrees) {
+                return degrees * Math.PI / 180;
+            }
+
+            function calculateDistance(point1, point2) {
+                const lat1 = point1.getLat();
+                const lng1 = point1.getLng();
+                const lat2 = point2.getLat();
+                const lng2 = point2.getLng();
+                const earthRadiusKm = 6371;
+
+                const dLat = degreesToRadians(lat2 - lat1);
+                const dLng = degreesToRadians(lng2 - lng1);
+
+                const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                            Math.cos(degreesToRadians(lat1)) * Math.cos(degreesToRadians(lat2)) *
+                            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                const distance = earthRadiusKm * c;
+                return distance;
+            }  
 
             polyline = new kakao.maps.Polyline({
                 map: map,
@@ -125,63 +151,69 @@ export default {
                 strokeStyle: 'solid'
             });
 
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    const {latitude, longitude } = position.coords;
-                    const currentPosition = new kakao.maps.LatLng(latitude, longitude);
+            const success = (position) => {
+                const {latitude, longitude } = position.coords;
+                const currentPosition = new kakao.maps.LatLng(latitude, longitude);
 
-                    // Add the current position to the polyline object
-                    const path = polyline.getPath();
-                    path.push(currentPosition);
-                    polyline.setPath(path);
+                // Add the current position to the polyline object
+                const path = polyline.getPath();
+                path.push(currentPosition);
+                polyline.setPath(path);
 
-                    if (!map) {
-                        const mapOptions = {
-                            center: new kakao.maps.LatLng(latitude, longitude),
-                            level: 3,
-                            MapTypeId: kakao.maps.MapTypeId.ROADMAP
-                        };                   
-                        map = new kakao.maps.Map(document.getElementById('map'),mapOptions);
-                        marker = new kakao.maps.Marker({position: currentPosition, map});
-                    } else {
-                        // Update the marker position and calculate the distance from the previous position
-                        marker.setPosition(currentPosition);
-                        map.panTo(currentPosition);
+                console.log(position); // Log the position every time it is updated
 
-                        const distance = previousPosition ? calculateDistance(previousPosition, currentPosition) : 0;
-                        if (distance === 0) {
-                            // Handle the case where the user did not move
-                            console.log("User did not move");
-                        } else {
-                            const distanceInKM = calculateDistance(previousPosition, currentPosition);
-                            console.log(`Distance traveled: ${distanceInKM.toFixed(2)} km`);
-                        }
+                if (!map) {
+                    const mapOptions = {
+                        center: new kakao.maps.LatLng(latitude, longitude),
+                        level: 3,
+                        MapTypeId: kakao.maps.MapTypeId.ROADMAP
+                    };                   
+                    map = new kakao.maps.Map(document.getElementById('map'),mapOptions);
+                    marker = new kakao.maps.Marker({position: currentPosition, map});
+                } else {
+                    // Update the marker position and calculate the distance from the previous position
+                    marker.setPosition(currentPosition);
+                    map.panTo(currentPosition);
+                    if (previousPosition) {
+                        const newDistance = calculateDistance(previousPosition, currentPosition);
+                        this.distance += newDistance;
+                        console.log(`Distance traveled: ${newDistance.toFixed(10)} km`);
+                        console.log(`Total distance traveled: ${distance.toFixed(10)} km`);
                     }
-                    previousPosition = currentPosition;
-                }, error => {
-                    console.log(error);
-            }) 
-        },
-        calculateDistance(point1, point2) {
-            const lat1 = point1.getLat();
-            const lng1 = point1.getLng();
-            const lat2 = point2.getLat();
-            const lng2 = point2.getLng();
-            const earthRadiusKm = 6371;
+                }
+                previousPosition = currentPosition;
+                // Simulate change in position after 5 seconds
+                setTimeout(() => {
+                    const randomLat = latitude + Math.random() * 0.01; // Generate a random latitude near the current latitude
+                    const randomLng = longitude + Math.random() * 0.01; // Generate a random longitude near the current longitude
+                    const newPosition = new kakao.maps.LatLng(randomLat, randomLng);
 
-            const dLat = degreesToRadians(lat2 - lat1);
-            const dLng = degreesToRadians(lng2 - lng1);
+                    // Update the marker position and calculate the distance from the previous position
+                    marker.setPosition(newPosition);
+                    map.panTo(newPosition);
+                    if (previousPosition) {
+                        const newDistance = calculateDistance(previousPosition, newPosition);
+                        distance += newDistance;
+                        console.log(`Distance more traveled: ${newDistance.toFixed(10)} km`);
+                        console.log(`Total distance traveled: ${distance.toFixed(10)} km`);
+                    }
+                    previousPosition = newPosition;
+                }, 5000);
+            }
 
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                        Math.cos(degreesToRadians(lat1)) * Math.cos(degreesToRadians(lat2)) *
-                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            const distance = earthRadiusKm * c;
-            return distance;
+            function error(err) {
+                console.warn(`ERROR(${err.code}): ${err.message}`);
+            }
+
+            watchId = navigator.geolocation.watchPosition(success, error);
         },
-        degreesToRadians(degrees) {
-            return degrees * Math.PI / 180;
+        stopTracking() {
+            navigator.geolocation.clearWatch(watchId);
+            this.distance = 0;
+            this.totalDistance = 0;
+            console.log('Tracking stopped.');
         },
+        
         startTimer() {
             this.timerId = setInterval(() => {
                 this.timer += 1
@@ -195,41 +227,25 @@ export default {
         },
         stopTimerAndNavigate() {
             this.stopTimer();
-            const timeData = { 
-                min: Math.floor(this.timer / 60), 
-                seconds: this.timer % 60 
+            this.totalDistance = this.distance; // Assign the current distance to totalDistance
+            this.distance = 0; // Reset the distance
+
+            const timeData = {
+                min: Math.floor(this.timer / 60),
+                seconds: this.timer % 60
             };
             console.log('timeData:', timeData);
+            console.log(`Final Distance: ${this.totalDistance.toFixed(10)} km`);
 
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    const { latitude, longitude } = position.coords;
-                    const currentPosition = new kakao.maps.LatLng(latitude, longitude);
-
-                    if (!this.previousPosition) {
-                        // Handle the case where there is no previous position
-                        this.previousPosition = currentPosition;
-                        console.log("No previous position available");
-                    } else {
-                        const distanceInKM = this.calculateDistance(this.previousPosition, currentPosition);
-                        console.log(`Distance traveled: ${distanceInKM.toFixed(2)} km`);
-                        this.previousPosition = currentPosition;
-                    }
-
-                    this.$router.push({ 
-                        name: 'WalkDayReport', 
-                        query : {
-                            min: timeData.min,
-                            seconds: timeData.seconds,
-                            totalDistance: this.totalDistance
-                        }
-                    });
-                }, 
-                error => {
-                    console.log(error);
+            this.$router.push({
+                name: 'WalkDayReport',
+                query: {
+                min: timeData.min,
+                seconds: timeData.seconds,
+                distance: this.totalDistance
                 }
-            );
-        },
+            });
+            },
         toggleTimer() {
             if ( this.isWalking ) {
                 this.stopTimer()

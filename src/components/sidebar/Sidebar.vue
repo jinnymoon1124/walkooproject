@@ -3,26 +3,9 @@
     <!-- 산책동행신청 모달창 -->
     <div class="black-bg" v-if="openModal == true">
         <div class="white-bg">
-            <h2>[효진]에게 산책 동행 신청을 보낼까요?</h2>
-            <label>
-                <input type="radio" name="option" value="1" ref="value1">
-                <span class="custom-radio"></span>
-                사람끼리만 산책해요!
-            </label>
-            
-            <label>
-                <input type="radio" name="option" value="2" ref="value2">
-                <span class="custom-radio"></span>
-                반려동물과 함께해요!
-            </label>
-            <label>
-                <input type="radio" name="option" value="3" ref="value3">
-                <span class="custom-radio"></span>
-                상관없어요~
-            </label>
-            <br>
-
-            <button class="send" @click="openModal = false">보내기</button>
+            <h2>[효진]님을 동행자에</h2>
+            <h2>추가하시겠습니까?</h2>
+            <button class="send" @click="openModal = false">추가</button>
             <button class="close" @click="openModal = false ">취소</button>
         </div>
     </div>
@@ -75,15 +58,7 @@ export default {
     data() {
         return {
             openModal : false,
-            selectedButton : null,
         };
-    },
-    methods: {
-        hideChecked() {
-            this.$refs.radio1.checked = false; 
-            this.$refs.radio2.checked = false; 
-            this.$refs.radio3.checked = false;
-        },
     },
     
 }
@@ -103,47 +78,15 @@ export default {
 .white-bg {
   background: rgb(255, 255, 255);
   border-radius: 8px;
-  padding: 70px;
-  font-size: 20px;
-  margin: 20vh 70px;
-
-}
-
-label {
-  display: inline-block;
-  margin: 10px;
   padding: 30px;
-  border-radius: 20px;
-  font-size: 25px;
-  font-weight: bolder;
-  cursor: pointer;
-  width: 300px;
-  background-color: rgb(0, 74, 0);
-  color: white;
-  
+  font-size: 20px;
+  margin: 30vh 70px;
+
 }
 
-input[type="radio"] {
-  display:none
-}
-
-
-.custom-radio {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 4px solid #ccc;
-  margin-right: 10px;
-}
-
-input[type="radio"]:checked + .custom-radio {
-  background-color: #5cb85c;
-  border-color: #5cb85c;
-}
 
 .send, .close {
-    margin: 50px 30px;
+    margin: 20px 30px;
     border-radius: 20px;
     width: 150px;
     height: 70px;

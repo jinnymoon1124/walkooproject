@@ -39,7 +39,7 @@
                     
                     <div class="long">
                         <img src="../assets/distanceicon.png">
-                        <p>{{ totalDistance }} KM</p>
+                        <p>{{ totalDistance  }} KM</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@ export default {
         min: 0,
         seconds: 0
       },
-      totalDistance: 0
+      totalDistance : 0,
     };
   },
   mounted() {
@@ -65,16 +65,17 @@ export default {
       min: parseInt(this.$route.query.min),
       seconds: parseInt(this.$route.query.seconds)
     };
-    this.totalDistance = parseFloat(this.$route.query.totalDistance || 0); // set totalDistance from query parameter, default to 0 if not available
     console.log('timeData:', this.timeData);
-    console.log('totalDistance:', this.totalDistance);
+
+    this.totalDistance = parseFloat(this.$route.query.distance); // Assign the value of distance to totalDistance
+
   },
   computed: {
     totalTime() {
       return `${this.timeData.min.toString().padStart(2, '0')}:${this.timeData.seconds.toString().padStart(2, '0')}`;
     },
-    formattedDistance() {
-      return `${this.totalDistance.toFixed(2)} km`; // format total distance to 2 decimal places
+    formattedTotalDistance() {
+        return this.totalDistance.toFixed(10); // Format totalDistance with desired precision
     }
 }
 };
