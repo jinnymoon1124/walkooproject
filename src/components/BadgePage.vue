@@ -1,5 +1,14 @@
 <template>
   <div class="badgepage">
+    <div class="MBcheck_bg" v-if="openModal == true">
+      <div class="MBcheck">
+        <p>선택한 배지를 대표 배지로 설정하시겠습니까?</p>
+        <div>
+          <button class="MBcheck_yes">네</button>
+          <button class="MBcheck_no" @click="openModal = false">아니오</button>
+        </div>
+      </div>
+    </div>
     <!-- top -->
     <div class="top">
       <div class="top_wrap">
@@ -17,7 +26,6 @@
 
     <!-- middle -->
     <div class="middle scroller">
-      
       <!-- 대표 배지 박스 -->
       <div class="mainbadge">
         <div class="MB_main">
@@ -26,7 +34,7 @@
           </div>
           <div class="MB_wrap">
             <div class="MB_left">
-              <img class="mainbadge_img" src alt="메인배지" />
+              <img class="mainbadge_img" src alt="대표 배지" />
             </div>
             <div class="MB_right">
               <p>대표 배지를<br />설정해 보세요!</p>
@@ -41,7 +49,7 @@
       <!-- 배지 리스트 -->
       <div class="badgelist">
         <div class="badge" v-for="(a, i) in badgedata" :key="i">
-          <div class="badge_img">
+          <div class="badge_img" @click="openModal = true">
             <img :src="a.img" />
           </div>
           <div class="badge_name">{{ a.name }}</div>
@@ -62,12 +70,41 @@ export default {
   data() {
     return {
       badgedata,
+      openModal: false,
     };
   },
 };
 </script>
 
 <style>
+.MBcheck_bg {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MBcheck {
+  width: 50vw;
+  background: white;
+  border-radius: 5px;
+  padding: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.MBcheck p {
+  margin: 3vw 0;
+}
+.MBcheck button {
+  width: 15vw;
+  padding: 1vw;
+  margin: 1vw 2vw;
+  border-radius: 5px;
+}
 .badgepage {
   width: 100vw;
   height: 100vh;
@@ -79,7 +116,7 @@ export default {
   height: 12vh;
   display: flex;
   justify-content: center; /* 가로 중앙에 위치 */
-  align-items: flex-end; /* 세로 위에서 70% 지점에 위치 */
+  align-items: flex-end;
   background: #687089;
   padding: 1em;
 }
