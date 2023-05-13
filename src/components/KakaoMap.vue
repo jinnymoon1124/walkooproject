@@ -117,7 +117,7 @@ export default {
             let marker;
             let previousPosition;
             let polyline;
-            let distance = 0;
+            
             let watchId;
             
             function degreesToRadians(degrees) {
@@ -178,7 +178,7 @@ export default {
                         const newDistance = calculateDistance(previousPosition, currentPosition);
                         this.distance += newDistance;
                         console.log(`Distance traveled: ${newDistance.toFixed(10)} km`);
-                        console.log(`Total distance traveled: ${distance.toFixed(10)} km`);
+                        console.log(`Total distance traveled: ${this.distance.toFixed(10)} km`);
                     }
                 }
                 previousPosition = currentPosition;
@@ -193,9 +193,9 @@ export default {
                     map.panTo(newPosition);
                     if (previousPosition) {
                         const newDistance = calculateDistance(previousPosition, newPosition);
-                        distance += newDistance;
+                        this.distance += newDistance;
                         console.log(`Distance more traveled: ${newDistance.toFixed(10)} km`);
-                        console.log(`Total distance traveled: ${distance.toFixed(10)} km`);
+                        console.log(`Total distance traveled: ${this.distance.toFixed(10)} km`);
                     }
                     previousPosition = newPosition;
                 }, 5000);

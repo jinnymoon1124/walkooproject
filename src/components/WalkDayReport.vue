@@ -39,7 +39,7 @@
                     
                     <div class="long">
                         <img src="../assets/distanceicon.png">
-                        <p>{{ totalDistance  }} KM</p>
+                        <p>{{ totalDistance.toFixed(2)  }} KM</p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ export default {
       return `${this.timeData.min.toString().padStart(2, '0')}:${this.timeData.seconds.toString().padStart(2, '0')}`;
     },
     formattedTotalDistance() {
-        return this.totalDistance.toFixed(10); // Format totalDistance with desired precision
+        return this.totalDistance.toFixed(2); // Format totalDistance with desired precision
     }
 }
 };
