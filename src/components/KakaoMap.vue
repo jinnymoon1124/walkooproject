@@ -1,7 +1,5 @@
 <template>
-  
   <div id="mappage">
-    
     <!-- 산책취소할건지 확인 모달창 -->
     <div class="black-bg" v-if="openModal1 == true">
         <div class="white-bg">
@@ -139,8 +137,6 @@ export default {
             let previousPosition;
             let polyline;
             let watchId;
-            
-            
 
             polyline = new kakao.maps.Polyline({
                 map: map,
@@ -251,7 +247,7 @@ export default {
                 this.isWalking = true;
                 this.timer = 0;
                 this.intervalId = setInterval(() => {
-                this.timer++;
+                    this.timer++;
                 }, 1000);
                 this.startRandomMovement(); 
                 if (this.position) {
@@ -262,8 +258,10 @@ export default {
                 // Call the startRandomMovement method
             } else {
                 // Stop the timer
-                this.isWalking = false;
-                clearInterval(this.intervalId);
+                // this.isWalking = false;
+                // clearInterval(this.intervalId);
+                this.stopTimer();
+                this.openModal2 = true;
             }
         },
         closeModal() {
