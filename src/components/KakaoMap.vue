@@ -104,12 +104,13 @@ export default {
             openModal2 : false,
             timer : 0,
             isWalking : false,
-            timerId : null,
             distance : 0, // Keep track of total distance
             watchId: null,
             position: null,
             marker: null,
             previousPosition: null, // Declare previousPosition variable
+            timeoutId: null, // Declare timeoutId variable
+            timerId : null,
         };
     },
     mounted() {
@@ -188,8 +189,8 @@ export default {
         startRandomMovement() {
             if (this.position) {
                 const { latitude, longitude } = this.position;
-                const randomLat = latitude + Math.random() * 0.01; // Generate a random latitude near the current latitude
-                const randomLng = longitude + Math.random() * 0.01; // Generate a random longitude near the current longitude
+                const randomLat = latitude + Math.random() * 0.001; // Generate a random latitude near the current latitude
+                const randomLng = longitude + Math.random() * 0.001; // Generate a random longitude near the current longitude
                 const newPosition = new kakao.maps.LatLng(randomLat, randomLng);
                 this.marker.setPosition(newPosition);
                 this.map.panTo(newPosition);
@@ -200,6 +201,10 @@ export default {
                     console.log(`Total distance traveled: ${this.distance.toFixed(3)} km`);
                 }
                 this.previousPosition = newPosition;
+
+                this.timeoutId = setTimeout(() => {
+                    this.startRandomMovement();
+                }, 2000);
             } else {
                 console.error('Position is not available.');
             }
@@ -249,7 +254,6 @@ export default {
                 this.intervalId = setInterval(() => {
                     this.timer++;
                 }, 1000);
-                this.startRandomMovement(); 
                 if (this.position) {
                     this.startRandomMovement(); // Call the startRandomMovement method
                 }else{
@@ -258,8 +262,10 @@ export default {
                 // Call the startRandomMovement method
             } else {
                 // Stop the timer
-                // this.isWalking = false;
-                // clearInterval(this.intervalId);
+                this.isWalking = false;
+                clearInterval(this.intervalId);
+                clearTimeout(this.timeoutId);
+
                 this.stopTimer();
                 this.openModal2 = true;
             }
