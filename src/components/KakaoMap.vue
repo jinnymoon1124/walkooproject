@@ -273,6 +273,8 @@ export default {
         closeModal() {
             this.openModal2 = false
             this.startTimer()
+            this.startRandomMovement(); // Call the startRandomMovement method
+
         },
         formatTime ( seconds ) {
             const min = Math.floor(seconds / 60)
