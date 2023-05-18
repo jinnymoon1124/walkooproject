@@ -111,6 +111,8 @@ export default {
             previousPosition: null, // Declare previousPosition variable
             timeoutId: null, // Declare timeoutId variable
             timerId : null,
+            polyline: null,
+
         };
     },
     mounted() {
@@ -139,8 +141,8 @@ export default {
             let polyline;
             let watchId;
 
-            polyline = new kakao.maps.Polyline({
-                map: map,
+            this.polyline = new kakao.maps.Polyline({
+                map: this.map,
                 path: [],
                 strokeWeight: 5,
                 strokeColor: '#FF0000',
@@ -152,11 +154,10 @@ export default {
                 this.position = position.coords;
                 const {latitude, longitude } = position.coords;
                 const currentPosition = new kakao.maps.LatLng(latitude, longitude);
-                const path = polyline.getPath();
+                const path = this.polyline.getPath();
                 path.push(currentPosition);
-                polyline.setPath(path);
+                this.polyline.setPath(path);
 
-                console.log(position); 
 
                 if (!map) {
                     const mapOptions = {
@@ -165,7 +166,15 @@ export default {
                         MapTypeId: kakao.maps.MapTypeId.ROADMAP
                     };                   
                     this.map = new kakao.maps.Map(document.getElementById('map'),mapOptions);
-                    this.marker = new kakao.maps.Marker({position: currentPosition, map});
+                    this.marker = new kakao.maps.Marker({position: currentPosition, map: this.map});
+                    this.polyline = new kakao.maps.Polyline({
+                        map: this.map,
+                        path: [],
+                        strokeWeight: 5,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.7,
+                        strokeStyle: 'solid'
+                    });
                 } else {
                     // Update the marker position and calculate the distance from the previous position
                     this.marker.setPosition(currentPosition);
@@ -186,12 +195,27 @@ export default {
             }
             watchId = navigator.geolocation.watchPosition(success, error);
         },
-        startRandomMovement() {
+        startRandomMovement(map) {
             if (this.position) {
                 const { latitude, longitude } = this.position;
                 const randomLat = latitude + Math.random() * 0.001; // Generate a random latitude near the current latitude
                 const randomLng = longitude + Math.random() * 0.001; // Generate a random longitude near the current longitude
                 const newPosition = new kakao.maps.LatLng(randomLat, randomLng);
+
+                if (!this.polyline) {
+                    this.polyline = new kakao.maps.Polyline({
+                        path: [newPosition],
+                        strokeWeight: 5,
+                        strokeColor: '#0000FF',
+                        strokeOpacity: 0.7,
+                        strokeStyle: 'solid'
+                    });
+                    this.polyline.setMap(map); // Add the polyline to the map
+                } else {
+                    const path = this.polyline.getPath();
+                    path.push(newPosition);
+                    this.polyline.setPath(path);
+                }
                 this.marker.setPosition(newPosition);
                 this.map.panTo(newPosition);
                 if (this.previousPosition) {
@@ -203,7 +227,7 @@ export default {
                 this.previousPosition = newPosition;
 
                 this.timeoutId = setTimeout(() => {
-                    this.startRandomMovement();
+                    this.startRandomMovement(map);
                 }, 2000);
             } else {
                 console.error('Position is not available.');
@@ -285,7 +309,7 @@ export default {
             this.stopTimer()
         },
     }
-};
+}
 </script>
 
 <style scoped>
