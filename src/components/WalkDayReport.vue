@@ -25,7 +25,7 @@
                     </div>
                     <div class="kcal">
                         <img src="../assets/kcal.png">
-                        <p>0 kcal</p>
+                        <p>{{calculateCaloriesBurned(this.totalDistance)}} 칼로리</p>
                         
                     </div>
                 </div>
@@ -51,34 +51,40 @@
 <script>
 export default {
   name: 'WalkDayReport',
-  data() {
-    return {
-      timeData: {
-        min: 0,
-        seconds: 0
-      },
-      totalDistance : 0,
-    };
-  },
-  mounted() {
-    this.timeData = {
-      min: parseInt(this.$route.query.min),
-      seconds: parseInt(this.$route.query.seconds)
-    };
-    console.log('timeData:', this.timeData);
-
-    this.totalDistance = parseFloat(this.$route.query.distance); // Assign the value of distance to totalDistance
-
-  },
-  computed: {
-    totalTime() {
-      return `${this.timeData.min.toString().padStart(2, '0')}:${this.timeData.seconds.toString().padStart(2, '0')}`;
+    data() {
+        return {
+        timeData: {
+            min: 0,
+            seconds: 0
+        },
+        totalDistance : 0,
+        };
     },
-    formattedTotalDistance() {
-        return this.totalDistance.toFixed(2); // Format totalDistance with desired precision
+    mounted() {
+        this.timeData = {
+        min: parseInt(this.$route.query.min),
+        seconds: parseInt(this.$route.query.seconds)
+        };
+        console.log('timeData:', this.timeData);
+
+        this.totalDistance = parseFloat(this.$route.query.distance); // Assign the value of distance to totalDistance
+
+    },
+    computed: {
+        totalTime() {
+        return `${this.timeData.min.toString().padStart(2, '0')}:${this.timeData.seconds.toString().padStart(2, '0')}`;
+        },
+        formattedTotalDistance() {
+            return this.totalDistance.toFixed(2); // Format totalDistance with desired precision
+        },
+        calculateCaloriesBurned() {
+            return (distance) => {
+                const calories = distance * 65; // Replace with your own formula
+                return calories.toFixed(0); // Format calories with desired precision
+            }
+        }
     }
 }
-};
 </script>
 
 <style scoped>

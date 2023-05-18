@@ -87,6 +87,15 @@ function calculateDistance(point1, point2) {
         const distance = earthRadiusKm * c;
         return distance;
 }
+function calculateCaloriesBurned(distance) {
+  // Conversion factor (calories per kilometer)
+  const conversionFactor = 65;
+
+  // Calculate calories burned
+  const caloriesBurned = distance * conversionFactor;
+
+  return caloriesBurned;
+}
 
 export default {
     name: 'KakaoMap',
@@ -130,111 +139,93 @@ export default {
     },
     methods: {
         loadKakaoMapAPI() {
-        const script = document.createElement('script');
-        script.onload = () => this.initMap();
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}`;
-        document.head.appendChild(script);
+            const script = document.createElement('script');
+            script.onload = () => this.initMap();
+            script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}`;
+            document.head.appendChild(script);
         },
         initMap() {
-            let map;
             let previousPosition;
-            let polyline;
-            let watchId;
-
-            this.polyline = new kakao.maps.Polyline({
-                map: this.map,
-                path: [],
-                strokeWeight: 5,
-                strokeColor: '#FF0000',
-                strokeOpacity: 0.7,
-                strokeStyle: 'solid'
-            });
 
             const success = (position) => {
                 this.position = position.coords;
-                const {latitude, longitude } = position.coords;
+                const { latitude, longitude } = position.coords;
                 const currentPosition = new kakao.maps.LatLng(latitude, longitude);
-                const path = this.polyline.getPath();
-                path.push(currentPosition);
-                this.polyline.setPath(path);
 
-
-                if (!map) {
+                if (!this.map) {
                     const mapOptions = {
                         center: new kakao.maps.LatLng(latitude, longitude),
                         level: 3,
                         MapTypeId: kakao.maps.MapTypeId.ROADMAP
-                    };                   
-                    this.map = new kakao.maps.Map(document.getElementById('map'),mapOptions);
-                    this.marker = new kakao.maps.Marker({position: currentPosition, map: this.map});
+                    };
+                    this.map = new kakao.maps.Map(document.getElementById('map'), mapOptions);
+                    this.marker = new kakao.maps.Marker({ position: currentPosition, map: this.map });
                     this.polyline = new kakao.maps.Polyline({
                         map: this.map,
                         path: [],
                         strokeWeight: 5,
-                        strokeColor: '#FF0000',
+                        strokeColor: '#00FF00',
                         strokeOpacity: 0.7,
                         strokeStyle: 'solid'
                     });
+                    this.previousPosition = currentPosition;
+
                 } else {
-                    // Update the marker position and calculate the distance from the previous position
+                    const path = this.polyline.getPath();
+                    path.push(currentPosition);
+                    this.polyline.setPath(path);
+
                     this.marker.setPosition(currentPosition);
-                    map.panTo(currentPosition);
-                    if (previousPosition) {
-                        const newDistance = calculateDistance(previousPosition, currentPosition);
+                    this.map.panTo(currentPosition);
+
+                    if (this.previousPosition) {
+
+                        this.previousPosition = currentPosition;
+
+                        const newDistance = calculateDistance(this.previousPosition, currentPosition);
                         this.distance += newDistance;
                         console.log(`Distance traveled: ${newDistance.toFixed(3)} km`);
                         console.log(`Total distance traveled: ${this.distance.toFixed(3)} km`);
                     }
-                    this.startRandomMovement(position);
                 }
-                previousPosition = currentPosition;
-                
-            }
+            };
+
             function error(err) {
                 console.warn(`ERROR(${err.code}): ${err.message}`);
             }
-            watchId = navigator.geolocation.watchPosition(success, error);
+            const watchOptions = { enableHighAccuracy: true };
+            this.watchId = navigator.geolocation.watchPosition(success, error, watchOptions);
+        
         },
         startRandomMovement(map) {
             if (this.position) {
                 const { latitude, longitude } = this.position;
-                const randomLat = latitude + Math.random() * 0.001; // Generate a random latitude near the current latitude
-                const randomLng = longitude + Math.random() * 0.001; // Generate a random longitude near the current longitude
+                const randomLat = latitude + Math.random() * 0.001;
+                const randomLng = longitude + Math.random() * 0.001;
                 const newPosition = new kakao.maps.LatLng(randomLat, randomLng);
 
-                if (!this.polyline) {
-                    this.polyline = new kakao.maps.Polyline({
-                        path: [newPosition],
-                        strokeWeight: 5,
-                        strokeColor: '#0000FF',
-                        strokeOpacity: 0.7,
-                        strokeStyle: 'solid'
-                    });
-                    this.polyline.setMap(map); // Add the polyline to the map
-                } else {
-                    const path = this.polyline.getPath();
-                    path.push(newPosition);
-                    this.polyline.setPath(path);
-                }
+                const path = this.polyline.getPath();
+                path.push(newPosition);
+                this.polyline.setPath(path);
+
                 this.marker.setPosition(newPosition);
                 this.map.panTo(newPosition);
+
                 if (this.previousPosition) {
                     const newDistance = calculateDistance(this.previousPosition, newPosition);
                     this.distance += newDistance;
-                    console.log(`Distance more traveled: ${newDistance.toFixed(3)} km`);
-                    console.log(`Total distance traveled: ${this.distance.toFixed(3)} km`);
                 }
                 this.previousPosition = newPosition;
 
                 this.timeoutId = setTimeout(() => {
-                    this.startRandomMovement(map);
+                    this.startRandomMovement();
                 }, 2000);
             } else {
-                console.error('Position is not available.');
+            console.error('Position is not available.');
             }
         },
         stopTracking() {
-            navigator.geolocation.clearWatch(watchId);
+            navigator.geolocation.clearWatch(this.watchId);
             this.distance = 0;
             this.totalDistance = 0;
             console.log('Tracking stopped.');
@@ -247,6 +238,7 @@ export default {
         },
         stopTimer() {
             clearInterval(this.timerId)
+            clearTimeout(this.timeoutId); // Add this line
             this.timerId = null
             this.isWalking = false
         },
@@ -254,19 +246,25 @@ export default {
             this.stopTimer();
             this.totalDistance = this.distance; // Assign the current distance to totalDistance
             this.distance = 0; // Reset the distance
+
+            const caloriesBurned = calculateCaloriesBurned(this.totalDistance); // Calculate calories burned
+            console.log(`소모칼로리: ${caloriesBurned.toFixed(0)} `);
+
             const timeData = {
                 min: Math.floor(this.timer / 60),
                 seconds: this.timer % 60
             };
             console.log('timeData:', timeData);
-            console.log(`Final Distance: ${this.totalDistance.toFixed(10)} km`);
+            console.log(`Final Distance: ${this.totalDistance.toFixed(3)} km`);
 
             this.$router.push({
                 name: 'WalkDayReport',
                 query: {
                 min: timeData.min,
                 seconds: timeData.seconds,
-                distance: this.totalDistance
+                distance: this.totalDistance,
+                calories: calculateCaloriesBurned(this.totalDistance), // Add the calories parameter
+
                 }
             });
         },
@@ -279,7 +277,7 @@ export default {
                     this.timer++;
                 }, 1000);
                 if (this.position) {
-                    this.startRandomMovement(); // Call the startRandomMovement method
+                    this.startRandomMovement();
                 }else{
                     console.error('Position is not available.');
                 }                
