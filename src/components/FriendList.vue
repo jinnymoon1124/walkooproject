@@ -1,7 +1,7 @@
 <template>
   <div id="friendlistpg">
     <!-- 아이디를 입력하라는 모달창 -->
-    <div class="black-bg" v-if="openModal == true && selectedFriend">
+    <!-- <div class="black-bg" v-if="openModal == true && selectedFriend">
       <div class="white-bg">
         <h2>약속장소와 시간을 입력하세요!</h2>
         <div class="container2" style="display: flex">
@@ -48,7 +48,7 @@
           네
         </button>
       </div>
-    </div>
+    </div> -->
 
     <div class="upperbar">
       <img
@@ -58,30 +58,35 @@
         @click="goBack"
       />
       <h1>나의 친구</h1>
-      <button class="friendadd-button2" @click="$router.push('./friendadd')">
-        친구추가
-      </button>
+      <div class="friendadd-button2_btn_wrap">
+        <div></div>
+        <button class="friendadd-button2" @click="$router.push('./friendadd')">
+          친구추가
+        </button>
+      </div>
     </div>
-    <div class="friend-list-box2">
-      <div class="friend-list2">
-        <div
-          v-for="friend in friends"
-          :key="friend.id"
-          class="friend2"
-          :src="`@/assets/friendimages/${name}`"
-        >
-          <img :src="friend.image" alt="friendimage" class="friend-image2" />
-          <span class="friend-name2">{{ friend.name }}</span>
-
-          <button
-            class="walkrq-button"
-            @click="
-              openModal = true;
-              showDetails(friend);
-            "
+    <div class="friend-list-box1">
+      <div class="friend-list-box2">
+        <div class="friend-list2">
+          <!-- <div
+            v-for="friend in friends"
+            :key="friend.id"
+            class="friend2"
+            :src="`@/assets/friendimages/${name}`"
           >
-            산책 신청
-          </button>
+            <img :src="friend.image" alt="friendimage" class="friend-image2" />
+            <span class="friend-name2">{{ friend.name }}</span>
+
+            <button
+              class="walkrq-button"
+              @click="
+                openModal = true;
+                showDetails(friend);
+              "
+            >
+              산책 신청
+            </button>
+          </div> -->
         </div>
       </div>
     </div>
@@ -172,19 +177,27 @@ export default {
 
 <style scoped>
 #friendlistpg {
-  height: 100%;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .upperbar {
   display: flex;
   align-items: center;
 }
-.upperbar > .friendadd-button2 {
+.friendadd-button2_btn_wrap {
+  display: flex;
+  padding: 1%;
+  flex-grow: 1;
+  /* padding-left: 30vw; */
+  justify-content: space-between;
+}
+.friendadd-button2_btn_wrap > .friendadd-button2 {
   width: 100px;
   height: 40px;
-  margin-left: 60%;
   border-radius: 30px;
   border: none;
-  margin-left: 48vh;
 }
 .upperbar > .friendadd-button2:hover {
   border: 5px solid grey;
@@ -194,11 +207,16 @@ export default {
 }
 .upperbar > h1 {
   font-size: 20px;
-  margin-left: 20px;
+  padding-left: 20px;
 }
-
+.friend-list-box1 {
+  width: 100%;
+  height: 95%;
+  padding: 2%;
+  box-sizing: border-box;
+}
 .friend-list-box2 {
-  width: 95%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -209,7 +227,6 @@ export default {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin-left: 10px;
 }
 
 .friend-list2 {
@@ -218,7 +235,6 @@ export default {
   white-space: nowrap;
 }
 .friend2 {
-  margin: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -229,17 +245,14 @@ export default {
 .friend-image2 {
   width: 100px;
   border-radius: 50%;
-  margin-left: 10px;
 }
 .friend-name2 {
-  margin-top: 1px;
   font-size: 100%;
   padding-left: 40px;
   font-weight: bold;
 }
 
 .walkrq-button {
-  margin-left: 10%;
   padding: 5px 10px;
   background-color: #dcdada;
   border: none;
@@ -255,7 +268,6 @@ export default {
 .image2 {
   width: 50%;
   border-radius: 50%;
-  margin: 40px;
 }
 
 .black-bg {
@@ -274,7 +286,6 @@ export default {
   border-radius: 30px;
   padding: 70px;
   font-size: 20px;
-  margin-left: 35px;
 }
 
 .no {
@@ -285,7 +296,6 @@ export default {
   border-radius: 25px;
   color: #ffffff;
   font-size: 2rem;
-  margin-right: 10px;
 }
 .no:hover {
   border: 5px solid grey;
@@ -303,7 +313,6 @@ export default {
   border-radius: 25px;
   color: #ffffff;
   font-size: 2rem;
-  margin-left: 10px;
 }
 .yes:hover {
   border: 5px solid grey;
@@ -317,8 +326,6 @@ export default {
   border-radius: 8px;
   width: 300px;
   height: 35px;
-  margin-top: 21px;
-  margin-left: 10px;
   padding: 5px 15px;
 }
 
@@ -348,7 +355,6 @@ input[type="radio"] {
   height: 20px;
   border-radius: 50%;
   border: 4px solid #ccc;
-  margin-right: 10px;
   background-color: #ada1a1;
 }
 input[type="radio"]:checked + .custom-radio {
@@ -358,7 +364,6 @@ input[type="radio"]:checked + .custom-radio {
 
 label {
   display: inline-block;
-  margin: 10px;
   padding: 30px;
   border-radius: 20px;
   font-size: 25px;

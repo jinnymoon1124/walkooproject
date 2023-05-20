@@ -1,12 +1,22 @@
 <template>
   <div class="badgepage">
+    <div class="MBcheck_bg" v-if="openModal == true">
+      <div class="MBcheck">
+        <p>선택한 배지를 대표 배지로 설정하시겠습니까?</p>
+        <div class="MBcheck_flex">
+          <button class="MBcheck_yes">네</button>
+          <div class="MBcheck_wrap"></div>
+          <button class="MBcheck_no" @click="openModal = false">아니오</button>
+        </div>
+      </div>
+    </div>
     <!-- top -->
     <div class="top">
       <div class="top_wrap">
         <div class="top_left">
           <img
             class="icon"
-            src="../assets/backbutton.png"
+            src="../assets/LeftIcon.png"
             @click="$router.go(-1)"
           />
         </div>
@@ -24,19 +34,11 @@
             <p>대표 배지</p>
           </div>
           <div class="MB_wrap">
-            <!-- mainBadgeIndex 값이 있는 경우에만 해당 배지 정보를 보여줍니다 -->
-            <div v-if="mainBadgeIndex !== null" class="MB_left">
-              <img class="mainbadge_img" :src="badgedata[mainBadgeIndex].img" />
-            </div>
-            <div v-else class="MB_left">
-              <img class="mainbadge_img" src alt="" />
+            <div class="MB_left">
+              <img class="mainbadge_img" src alt="대표 배지" />
             </div>
             <div class="MB_right">
-              <!-- mainBadgeIndex 값이 있는 경우 해당 배지 이름을 보여줍니다 -->
-              <p v-if="mainBadgeIndex !== null">
-                {{ badgedata[mainBadgeIndex].name }}
-              </p>
-              <p v-else>대표 배지를<br />설정해 보세요!</p>
+              <p>대표 배지를<br />설정해 보세요!</p>
             </div>
           </div>
         </div>
@@ -47,14 +49,8 @@
 
       <!-- 배지 리스트 -->
       <div class="badgelist">
-        <!-- BadgeList 템플릿의 badge 요소에서 @click 메서드를 호출 -->
-        <div
-          class="badge"
-          v-for="(a, i) in badgedata"
-          :key="i"
-          @click="setMainBadge(i)"
-        >
-          <div class="badge_img">
+        <div class="badge" v-for="(a, i) in badgedata" :key="i">
+          <div class="badge_img" @click="openModal = true">
             <img :src="a.img" />
           </div>
           <div class="badge_name">{{ a.name }}</div>
@@ -65,36 +61,67 @@
 </template>
 
 <script>
-import badgedata from "../assets/BadgePage/BadgeData.js";
+import badgedata from "../assets/BadgeData.js";
 
 export default {
   name: "MyPage",
   data() {
     return {
       badgedata,
-      mainBadgeIndex: null,
+      openModal: false,
     };
-  },
-  methods: {
-    setMainBadge(index) {
-      this.mainBadgeIndex = index;
-    },
   },
 };
 </script>
 
-<style scoped>
-.badgepage {
+<style>
+.MBcheck_bg {
+  width: 100%;
   height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MBcheck {
+  width: 50%;
+  background: white;
+  border-radius: 5px;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.MBcheck p {
+  margin: 3% 0;
+}
+.MBcheck_flex {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+}
+.MBcheck button {
+  width: 70%;
+  padding: 2%;
+  border-radius: 5px;
+}
+.MBcheck_wrap {
+  width: 10%;
+}
+.badgepage {
+  width: 100%;
+  height: 90vh;
 }
 .badgepage .top {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 12vh;
+  height: 10%;
   display: flex;
   justify-content: center; /* 가로 중앙에 위치 */
-  align-items: flex-end; /* 세로 위에서 70% 지점에 위치 */
+  align-items: flex-end;
   background: #687089;
   padding: 1em;
 }
@@ -129,7 +156,7 @@ export default {
 .badgepage .middle {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 90%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -200,11 +227,11 @@ export default {
   flex-direction: row-reverse;
 }
 .mainbadge_img {
-  width: 150px;
-  height: 150px;
-  background-color: #fefefe;
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
   border-radius: 100%;
-  margin: -30px 60px 10px 0px;
+  margin: 5px;
 }
 .badgepage .MB_right {
   width: 50%;
@@ -216,8 +243,8 @@ export default {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 20px;
+  line-height: 21px;
   /* or 105% */
 
   text-align: center;
@@ -240,7 +267,7 @@ export default {
 }
 .badgepage .badge {
   width: 30%;
-  height: 30%;
+  height: 29%;
   margin: 1%;
 
   display: flex;
@@ -249,8 +276,8 @@ export default {
   justify-content: center;
 }
 .badgepage .badge_img {
-  width: 150px;
-  height: 150px;
+  width: 5rem;
+  height: 5rem;
 
   display: flex;
   align-items: center;
@@ -260,24 +287,19 @@ export default {
   border-radius: 100%;
 }
 .badgepage .badge_img img {
-  width: 60px;
+  width: 45%;
+  height: auto;
 }
 .badgepage .badge_name {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 1em;
   text-align: center;
   letter-spacing: -0.32px;
   color: #747474;
 
-  padding: 0.5vw 0;
-}
-
-.mainbadge_img {
-  width: 150px;
-  height: 150px;
-  padding: 20px;
+  padding: 5% 0;
 }
 </style>
 

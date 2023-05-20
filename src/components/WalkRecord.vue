@@ -2,9 +2,18 @@
   <div class="WalkRecordPage">
     <!-- top -->
     <div class="top">
-      <p class="top_name">산책기록</p>
+      <div class="top_wrap">
+        <div class="top_left">
+          <img
+            class="icon"
+            src="../assets/LeftIcon.png"
+            @click="$router.go(-1)"
+          />
+        </div>
+        <p class="top_center top_name">산책기록</p>
+        <div class="top_right"></div>
+      </div>
     </div>
-
     <!-- middle -->
     <div class="middle">
       <div class="calendar">
@@ -198,19 +207,35 @@ export default {
 
 <style scoped>
 .WalkRecordPage {
-  height: 100vh;
+  width: 100%;
+  height: 90vh;
   overflow-y: auto;
 }
 .WalkRecordPage .top {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 12vh;
+  height: 10%;
   display: flex;
   justify-content: center; /* 가로 중앙에 위치 */
-  align-items: flex-end; /* 세로 위에서 70% 지점에 위치 */
+  align-items: flex-end;
   background: #687089;
   padding: 1em;
+}
+.WalkRecordPage .top_wrap {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.WalkRecordPage .top_center {
+  width: 70%;
+  height: fit-content;
+}
+.WalkRecordPage .top_left,
+.WalkRecordPage .top_right {
+  width: 15%;
+  height: fit-content;
 }
 .WalkRecordPage .top_name {
   text-align: center;
@@ -219,14 +244,16 @@ export default {
   font-weight: 700;
   font-size: 1.3rem;
   line-height: 21px;
+
   text-align: center;
   letter-spacing: -0.32px;
+
   color: #ffffff;
 }
 .WalkRecordPage .middle {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 90%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -234,7 +261,8 @@ export default {
 }
 
 .calendar {
-  width: 750px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -247,8 +275,8 @@ export default {
   justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
-  padding: 20px;
-  height: 50px;
+  padding: 5px 20px;
+  height: auto;
 }
 .thismonth {
   font-weight: bold;
@@ -290,7 +318,8 @@ export default {
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: 130px; /* 변경된 높이 */
+  /* grid-auto-rows: 130px; 변경된 높이 */
+  flex-grow: 1;
 }
 
 .date {
