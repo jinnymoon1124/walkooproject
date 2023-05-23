@@ -32,11 +32,7 @@
     </div>
     <div id= "walkcontainer">
         <div id="pointcontainer">
-            <img class = "point" src="../assets/point.png">
-            <img class = "point" src="../assets/point.png">
-            <img class = "point" src="../assets/point.png">
-            <img class = "point" src="../assets/point.png">
-            <img class = "point" src="../assets/point.png">
+            <img v-for="(image, index) in images" :key="index" :src="image" class="point" />
         </div>
         <div id="datacontainer">
             <div class="walkdata">
@@ -67,6 +63,9 @@
 import Sidebar from './sidebar/Sidebar.vue'
 import { sidebarWidth, sidebarHeight } from './sidebar/state';
 import WalkDayReport from './WalkDayReport.vue';
+import pointImage from '@/assets/point.png';
+import getpointImage from '@/assets/getpoint.png';
+
 
 function degreesToRadians(degrees) {
                 return degrees * Math.PI / 180;
@@ -97,6 +96,7 @@ function calculateCaloriesBurned(distance) {
   return caloriesBurned;
 }
 
+
 export default {
     name: 'KakaoMap',
     components: {
@@ -121,6 +121,7 @@ export default {
             timeoutId: null, // Declare timeoutId variable
             timerId : null,
             polyline: null,
+            images : Array(5).fill(pointImage),
 
         };
     },
@@ -132,7 +133,8 @@ export default {
             script.onload = () => kakao.maps.load(this.initMap);
             script.src = '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=930ce9e25463ef7e86418ee9d4ba0575';
             document.head.appendChild(script);
-        }
+        };
+
     },
     created() {
         this.loadKakaoMapAPI();
@@ -257,15 +259,15 @@ export default {
             console.log('timeData:', timeData);
             console.log(`Final Distance: ${this.totalDistance.toFixed(3)} km`);
 
+
             this.$router.push({
                 name: 'WalkDayReport',
                 query: {
-                min: timeData.min,
-                seconds: timeData.seconds,
-                distance: this.totalDistance,
-                calories: calculateCaloriesBurned(this.totalDistance), // Add the calories parameter
-
-                }
+                    min: timeData.min,
+                    seconds: timeData.seconds,
+                    distance: this.totalDistance,
+                    calories: calculateCaloriesBurned(this.totalDistance), 
+                },
             });
         },
         toggleTimer() {
@@ -275,7 +277,12 @@ export default {
                 this.timer = 0;
                 this.intervalId = setInterval(() => {
                     this.timer++;
+
+                    if (this.timer % 5 === 0) {
+                        this.changeImage();
+                    }
                 }, 1000);
+
                 if (this.position) {
                     this.startRandomMovement();
                 }else{
@@ -291,6 +298,18 @@ export default {
                 this.stopTimer();
                 this.openModal2 = true;
             }
+        },
+        changeImage() {
+            const newImage = getpointImage;
+            const currentIndex = Math.floor(this.timer / 5) - 1;
+
+            if (currentIndex < this.images.length) {
+                // Replace the image at the current index with the new image
+                this.images.splice(currentIndex, 1, newImage);
+            }  
+        },
+        updateChangedImageCount(count) {
+            this.changedImageCount = count;
         },
         closeModal() {
             this.openModal2 = false

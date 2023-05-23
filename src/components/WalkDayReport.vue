@@ -10,11 +10,8 @@
                 </div>
                 <div class="todaypoint">
                     <p>획득한 도토리</p>
-                    <img src="../assets/getpoint.png">
-                    <img src="../assets/getpoint.png">
-                    <img src="../assets/point.png">
-                    <img src="../assets/point.png">
-                    <img src="../assets/point.png">
+                    <img v-for="(image, index) in images" :key="index" :src="image" class="point" />
+
                 </div>
 
                 <div class="todaydata_1">
@@ -49,17 +46,23 @@
 </template>
 
 <script>
+import pointImage from '@/assets/point.png';
+import getpointImage from '@/assets/getpoint.png';
+
 export default {
   name: 'WalkDayReport',
     data() {
         return {
-        timeData: {
-            min: 0,
-            seconds: 0
-        },
-        totalDistance : 0,
+            timeData: {
+                min: 0,
+                seconds: 0
+            },
+            totalDistance : 0,
+            images: Array(5).fill(pointImage),
+
         };
     },
+
     mounted() {
         this.timeData = {
         min: parseInt(this.$route.query.min),
@@ -68,7 +71,9 @@ export default {
         console.log('timeData:', this.timeData);
 
         this.totalDistance = parseFloat(this.$route.query.distance); // Assign the value of distance to totalDistance
+        console.log('이미지데이터 : ', this.changedImageCount);
 
+        this.changeImages();
     },
     computed: {
         totalTime() {
@@ -81,6 +86,19 @@ export default {
             return (distance) => {
                 const calories = distance * 65; // Replace with your own formula
                 return calories.toFixed(0); // Format calories with desired precision
+            }
+        },
+    },
+    methods: {
+        changeImages() {
+            const numImageChanges = Math.floor(this.timeData.seconds / 5);
+            const newImage = getpointImage;
+
+            for (let i = 0; i < numImageChanges; i++) {
+                if (i < this.images.length) {
+                // Replace the image at the current index with the new image
+                this.images.splice(i, 1, newImage);
+                }
             }
         }
     }
