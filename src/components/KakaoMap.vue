@@ -62,7 +62,6 @@
 <script>
 import Sidebar from './sidebar/Sidebar.vue'
 import { sidebarWidth, sidebarHeight } from './sidebar/state';
-import WalkDayReport from './WalkDayReport.vue';
 import pointImage from '@/assets/point.png';
 import getpointImage from '@/assets/getpoint.png';
 
@@ -101,7 +100,7 @@ export default {
     name: 'KakaoMap',
     components: {
         Sidebar,
-        WalkDayReport,
+        
     },
     setup() {
         return {sidebarWidth , sidebarHeight}
@@ -136,18 +135,9 @@ export default {
         };
 
     },
-    created() {
-        this.loadKakaoMapAPI();
-    },
+
     methods: {
-        loadKakaoMapAPI() {
-            const script = document.createElement('script');
-            script.onload = () => this.initMap();
-            script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.VUE_APP_KAKAO_MAP_API_KEY}`;
-            document.head.appendChild(script);
-        },
         initMap() {
-            let previousPosition;
 
             const success = (position) => {
                 this.position = position.coords;
@@ -199,7 +189,7 @@ export default {
             this.watchId = navigator.geolocation.watchPosition(success, error, watchOptions);
         
         },
-        startRandomMovement(map) {
+        startRandomMovement() {
             if (this.position) {
                 const { latitude, longitude } = this.position;
                 const randomLat = latitude + Math.random() * 0.001;
@@ -249,7 +239,7 @@ export default {
             this.totalDistance = this.distance; // Assign the current distance to totalDistance
             this.distance = 0; // Reset the distance
 
-            const caloriesBurned = calculateCaloriesBurned(this.totalDistance); // Calculate calories burned
+            const caloriesBurned = calculateCaloriesBurned(this.totalDistance); // Calculate calories bWalkDayReporturned
             console.log(`소모칼로리: ${caloriesBurned.toFixed(0)} `);
 
             const timeData = {
