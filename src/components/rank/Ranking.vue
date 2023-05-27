@@ -1,80 +1,87 @@
 <template>
   <div id="Myrankingpg">
-    <div class="rank-head">랭킹</div>
-    <div>
+    <!-- top -->
+    <div class="top">
+      <div class="top_wrap">
+        <div class="top_left"></div>
+        <p class="top_center top_name">랭킹</p>
+        <div class="top_right"></div>
+      </div>
+    </div>
+
+    <div class="Rank_middle">
       <h3 id="myRank">나의 랭킹</h3>
       <div class="arrow-buttons-container">
         <!-- 왼쪽 화살표 버튼 -->
-        <button @click="PetRankPage" class="arrow-button left">
-          &#60; 반려동물 랭킹
-        </button>
+        <div @click="PetRankPage" class="arrow-button">&#60; 반려동물 랭킹</div>
         <!-- 오른쪽 화살표 버튼 -->
-        <button @click="FamilyRankPage" class="arrow-button right">
-          가족 랭킹 &#62;
-        </button>
+        <div @click="FamilyRankPage" class="arrow-button">가족 랭킹 &#62;</div>
       </div>
 
       <!-- 랭킹 데이터 -->
-      <div class="rank">
-        <div class="rank-container">
-          <h2>{{ data[0].title }}</h2>
-          <p>{{ compareCount() }}</p>
-          <div class="green-rank">
-            <!-- months 데이터 반복문 -->
-            <div v-for="month in lastTwoMonths" :key="month.id">
-              <p>{{ month.month }}월</p>
-              <!-- month 그래프 -->
-              <div class="graph">
-                <div class="text">{{ month.count }}회</div>
-                <div
-                  ref="green"
-                  :style="{ width: getGreenWidth(month.count) }"
-                ></div>
+      <div class="rank_margin">
+        <div class="rank">
+          <div class="rank-container">
+            <h2>{{ data[0].title }}</h2>
+            <p>{{ compareCount() }}</p>
+            <div class="green-rank">
+              <!-- months 데이터 반복문 -->
+              <div v-for="month in lastTwoMonths" :key="month.id">
+                <p>{{ month.month }}월</p>
+                <!-- month 그래프 -->
+                <div class="graph">
+                  <div class="text">{{ month.count }}회</div>
+                  <div
+                    ref="green"
+                    :style="{ width: getGreenWidth(month.count) }"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- 그래프 추가하고 싶음 -->
-        <div class="rank-container">
-          <h2>{{ data[1].title }}</h2>
-          <div class="pink-rank">
-            <!-- friends 데이터 반복문 -->
-            <div v-for="(friend, index) in sortedFriends" :key="friend.id">
-              <div class="friend-container" v-show="friend.count !== 0">
-                <div class="profile">
-                  <img :src="friend.img" />
-                </div>
-                <div class="friend-info">
-                  <p>{{ friend.name }}</p>
-                  <div class="graph">
-                    <div class="text">{{ friend.count }}회</div>
-                    <div
-                      ref="pink"
-                      :style="{ width: getPinkWidth(friend.count) }"
-                    ></div>
+          <!-- 그래프 추가하고 싶음 -->
+          <div class="rank-container">
+            <h2>{{ data[1].title }}</h2>
+            <div class="pink-rank">
+              <!-- friends 데이터 반복문 -->
+              <div v-for="(friend, index) in sortedFriends" :key="friend.id">
+                <div class="friend-container" v-show="friend.count !== 0">
+                  <div class="profile">
+                    <img :src="friend.img" />
+                  </div>
+                  <div class="friend-info">
+                    <p>{{ friend.name }}</p>
+                    <div class="graph">
+                      <div class="text">{{ friend.count }}회</div>
+                      <div
+                        ref="pink"
+                        :style="{ width: getPinkWidth(friend.count) }"
+                      ></div>
+                    </div>
                   </div>
                 </div>
+                <!-- 마지막 데이터가 아닐 때만 구분선 표시 -->
+                <hr
+                  class="friend-separator"
+                  v-if="
+                    index < sortedFriends.length - 1 &&
+                    friend.count !== 0 &&
+                    sortedFriends[index + 1].count !== 0
+                  "
+                />
               </div>
-              <!-- 마지막 데이터가 아닐 때만 구분선 표시 -->
-              <hr
-                class="friend-separator"
-                v-if="
-                  index < sortedFriends.length - 1 &&
-                  friend.count !== 0 &&
-                  sortedFriends[index + 1].count !== 0
-                "
-              />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="page-indicator">
+
+    <!-- <div class="page-indicator">
       <span class="filled"></span>
       <span class="empty"></span>
       <span class="empty"></span>
       <span class="empty"></span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -183,8 +190,15 @@ export default defineComponent({
 
 <style>
 #Myrankingpg {
-  height: 100vh;
-  overflow-y: auto; /* 스크롤이 생기도록 설정 */
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Rank_middle {
+  width: 100%;
+  height: 90%;
 }
 /* 페이지 정보*/
 .rank-head {
@@ -200,24 +214,50 @@ export default defineComponent({
 
 /* 페이지 정보 바 */
 #myRank {
-  text-align: center;
+  width: 100%;
+  height: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #638263;
-  padding: 15px;
   border-radius: 10px;
   color: #ffffff;
-  height: 2vh;
+}
+
+/* 페이지 이동 버튼 */
+.arrow-buttons-container {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrow-button {
+  font-size: 15px;
+  border: none;
+  color: #a2a2a2;
+  padding: 0 2%;
+  cursor: pointer;
 }
 
 /* 페이지 전체 테두리 */
+.rank_margin {
+  width: 100%;
+  height: 90%;
+  padding: 2%;
+  box-sizing: border-box;
+}
 .rank {
-  background-color: #ffffff; /* 배경색을 하얀색(#ffffff)으로 지정 */
-  border: 5px solid #e7e4e4; /* 테두리를 1px의 검은색(#000000) 실선으로 지정 */
-  border-radius: 20px; /* 모서리를 10px로 둥글게 지정 */
-  text-align: left;
-  padding: 15px 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 5px solid #e7e4e4;
+  border-radius: 20px;
+  padding: 3%;
+  overflow-y: scroll;
 }
 .rank-container {
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
 /* 초록 테두리와 핑크 테두리 */
@@ -306,26 +346,6 @@ export default defineComponent({
 /* 구분선 */
 .friend-separator {
   border: 1.5px solid #dddddd;
-}
-
-/* 페이지 이동 버튼 */
-.arrow-buttons-container {
-  display: flex;
-  justify-content: space-between;
-}
-.arrow-button {
-  font-size: 15px;
-  background-color: #ffffff;
-  border: none;
-  color: #a2a2a2;
-  padding: 10px;
-  cursor: pointer;
-}
-.left {
-  align-self: flex-start;
-}
-.right {
-  align-self: flex-end;
 }
 
 /* 페이지 위치 */

@@ -14,7 +14,7 @@
     </div>
     <div class="content">
       <!-- 상단 **네 하우스, 알림창 버튼 -->
-      <div class="top">
+      <div class="Main_top">
         <div class="title">'나희'네 하우스</div>
         <div class="btn_wrap alarm">
           <router-link to="/alarm" class="circle-button">
@@ -76,6 +76,7 @@ export default defineComponent({
 .MainPage .notice {
   width: 100%;
   height: auto;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,8 +93,8 @@ export default defineComponent({
   width: 100%;
 }
 .MainPage .slide-button {
-  bottom: 20%;
-  right: 5%;
+  bottom: 35%;
+  right: 3%;
   position: absolute;
   /* transform: translateX(-50%); */
   padding: 1px 10px;
@@ -113,7 +114,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
 }
-.MainPage .top {
+.MainPage .Main_top {
   width: 100%;
   height: auto;
   display: flex;

@@ -1,49 +1,59 @@
 <template>
   <div id="Petrankpg">
-    <div class="rank-head">랭킹</div>
-    <div>
-      <h3 id="myRank">반려동물 랭킹</h3>
-      <div class="arrow-buttons-container">
-        <!-- 왼쪽 화살표 버튼 -->
-        <button @click="FriendRankPage" class="arrow-button left">
-          &#60; 친구 랭킹
-        </button>
-        <!-- 오른쪽 화살표 버튼 -->
-        <button @click="MyRankPage" class="arrow-button right">
-          나의 랭킹 &#62;
-        </button>
+    <!-- top -->
+    <div class="top">
+      <div class="top_wrap">
+        <div class="top_left"></div>
+        <p class="top_center top_name">랭킹</p>
+        <div class="top_right"></div>
       </div>
     </div>
 
-    <div class="rank">
-      <h3 class="top">TOP 10</h3>
-      <div
-        class="green-rank"
-        v-for="(pet, index) in sortedPets.slice(0, 10)"
-        :key="index"
-      >
-        <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
-        <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
-        <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
-        <div class="friend-container">
-          <div class="profile">
-            <img :src="pet.img" />
-          </div>
-          <div class="friend-info">
-            <h3>{{ pet.name }}</h3>
-            <p>LV.{{ pet.level }}</p>
-            <p>산책 횟수 : {{ pet.number }}회</p>
+    <div class="Rank_middle">
+      <h3 id="myRank">반려동물 랭킹</h3>
+      <div class="arrow-buttons-container">
+        <!-- 왼쪽 화살표 버튼 -->
+        <div @click="FriendRankPage" class="arrow-button left">
+          &#60; 친구 랭킹
+        </div>
+        <!-- 오른쪽 화살표 버튼 -->
+        <div @click="MyRankPage" class="arrow-button right">
+          나의 랭킹 &#62;
+        </div>
+      </div>
+
+      <div class="rank_margin">
+        <div class="rank">
+          <h3 class="top">TOP 10</h3>
+          <div
+            class="green-rank"
+            v-for="(pet, index) in sortedPets.slice(0, 10)"
+            :key="index"
+          >
+            <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
+            <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
+            <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
+            <div class="friend-container">
+              <div class="profile">
+                <img :src="pet.img" />
+              </div>
+              <div class="friend-info">
+                <h3>{{ pet.name }}</h3>
+                <p>LV.{{ pet.level }}</p>
+                <p>산책 횟수 : {{ pet.number }}회</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="page-indicator">
+    <!-- <div class="page-indicator">
       <span class="empty"></span>
       <span class="empty"></span>
       <span class="empty"></span>
       <span class="filled"></span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -79,9 +89,11 @@ export default {
 
 <style scoped>
 #Petrankpg {
-  height: 100vh;
-  overflow-y: auto; /* 스크롤이 생기도록 설정 */
-  overflow-x: hidden;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .green-rank {
   position: relative; /* 부모 요소에 대해 상대적인 위치 설정 */

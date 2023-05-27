@@ -1,50 +1,60 @@
 <template>
   <div id="Friendrankpg">
-    <div class="rank-head">랭킹</div>
-    <div>
-      <h3 id="myRank">친구 랭킹</h3>
-      <div class="arrow-buttons-container">
-        <!-- 왼쪽 화살표 버튼 -->
-        <button @click="FamilyRankPage" class="arrow-button left">
-          &#60; 가족 랭킹
-        </button>
-        <!-- 오른쪽 화살표 버튼 -->
-        <button @click="PetRankPage" class="arrow-button right">
-          반려동물 랭킹 &#62;
-        </button>
+    <!-- top -->
+    <div class="top">
+      <div class="top_wrap">
+        <div class="top_left"></div>
+        <p class="top_center top_name">랭킹</p>
+        <div class="top_right"></div>
       </div>
     </div>
 
-    <div class="rank">
-      <h3 class="top">TOP 10</h3>
-      <div
-        class="green-rank"
-        v-for="(friend, index) in sortedFriends.slice(0, 10)"
-        :key="index"
-      >
-        <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
-        <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
-        <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
-        <div class="friend-container">
-          <div class="profile">
-            <img :src="friend.img" />
-          </div>
-          <div class="friend-info">
-            <h3>{{ friend.name }}</h3>
-            <p>총 {{ friend.range }}KM 산책</p>
-            <p>총 {{ friend.time }}시간 산책</p>
-            <p>동반 산책 : {{ friend.mate }}회</p>
+    <div class="Rank_middle">
+      <h3 id="myRank">친구 랭킹</h3>
+      <div class="arrow-buttons-container">
+        <!-- 왼쪽 화살표 버튼 -->
+        <div @click="FamilyRankPage" class="arrow-button left">
+          &#60; 가족 랭킹
+        </div>
+        <!-- 오른쪽 화살표 버튼 -->
+        <div @click="PetRankPage" class="arrow-button right">
+          반려동물 랭킹 &#62;
+        </div>
+      </div>
+
+      <div class="rank_margin">
+        <div class="rank">
+          <h3 class="top">TOP 10</h3>
+          <div
+            class="green-rank"
+            v-for="(friend, index) in sortedFriends.slice(0, 10)"
+            :key="index"
+          >
+            <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
+            <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
+            <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
+            <div class="friend-container">
+              <div class="profile">
+                <img :src="friend.img" />
+              </div>
+              <div class="friend-info">
+                <h3>{{ friend.name }}</h3>
+                <p>총 {{ friend.range }}KM 산책</p>
+                <p>총 {{ friend.time }}시간 산책</p>
+                <p>동반 산책 : {{ friend.mate }}회</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="page-indicator">
+    <!-- <div class="page-indicator">
       <span class="empty"></span>
       <span class="empty"></span>
       <span class="filled"></span>
       <span class="empty"></span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -82,11 +92,11 @@ export default {
 
 <style scoped>
 #Friendrankpg {
-  height: 100vh;
-  overflow-y: auto; /* 스크롤이 생기도록 설정 */
-}
-.top {
-  text-align: center;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .green-rank {

@@ -231,6 +231,7 @@ export default {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 10px;
+  overflow-y: scroll;
 }
 
 .friend-list2 {
@@ -238,7 +239,6 @@ export default {
   margin: 0;
   padding: 0;
   white-space: nowrap;
-  overflow-y: scroll;
 }
 .friend2 {
   display: flex;

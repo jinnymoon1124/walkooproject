@@ -3,10 +3,7 @@
     <!-- top -->
     <div class="top">
       <div class="top_wrap">
-        <div class="top_left">
-          <!-- 마이페이지에는 뒤로가기 버튼이 없기 때문에 주석처리 -->
-          <!-- <img class="icon" src="../assets/BadgePage/LeftIcon.png" />  -->
-        </div>
+        <div class="top_left"></div>
         <p class="top_center top_name">마이페이지</p>
         <div class="top_right"></div>
       </div>
@@ -170,47 +167,6 @@ export default {
 .mypage {
   width: 100%;
   height: 90vh;
-}
-
-/* top */
-.mypage .top {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: center; /* 가로 중앙에 위치 */
-  align-items: flex-end; /* 세로 위에서 70% 지점에 위치 */
-  background: #687089;
-  padding: 1em;
-}
-.mypage .top_wrap {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-}
-.mypage .top_center {
-  width: 70%;
-  height: fit-content;
-}
-.mypage .top_left,
-.mypage .top_right {
-  width: 15%;
-  height: fit-content;
-}
-.mypage .top_name {
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.3rem;
-  line-height: 21px;
-
-  text-align: center;
-  letter-spacing: -0.32px;
-
-  color: #ffffff;
 }
 
 /* middle */

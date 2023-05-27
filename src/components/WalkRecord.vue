@@ -5,7 +5,6 @@
       <div class="top_wrap">
         <div class="top_left">
           <img
-            class="icon"
             src="../assets/LeftIcon.png"
             @click="$router.go(-1)"
           />
@@ -217,45 +216,7 @@ export default {
   height: 90vh;
   overflow-y: auto;
 }
-.WalkRecordPage .top {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: center; /* 가로 중앙에 위치 */
-  align-items: flex-end;
-  background: #687089;
-  padding: 1em;
-}
-.WalkRecordPage .top_wrap {
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-}
-.WalkRecordPage .top_center {
-  width: 70%;
-  height: fit-content;
-}
-.WalkRecordPage .top_left,
-.WalkRecordPage .top_right {
-  width: 15%;
-  height: fit-content;
-}
-.WalkRecordPage .top_name {
-  text-align: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.3rem;
-  line-height: 21px;
 
-  text-align: center;
-  letter-spacing: -0.32px;
-
-  color: #ffffff;
-}
 .WalkRecordPage .middle {
   position: relative;
   width: 100%;

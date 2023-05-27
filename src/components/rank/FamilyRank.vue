@@ -1,50 +1,58 @@
 <template>
   <div id="Familyrankingpg">
-    <div class="rank-head">랭킹</div>
-    <div>
-      <h3 id="myRank">가족 랭킹</h3>
-      <div class="arrow-buttons-container">
-        <!-- 왼쪽 화살표 버튼 -->
-        <button @click="MyRankPage" class="arrow-button left">
-          &#60; 나의 랭킹
-        </button>
-        <!-- 오른쪽 화살표 버튼 -->
-        <button @click="FriendRankPage" class="arrow-button right">
-          친구 랭킹 &#62;
-        </button>
+    <!-- top -->
+    <div class="top">
+      <div class="top_wrap">
+        <div class="top_left"></div>
+        <p class="top_center top_name">랭킹</p>
+        <div class="top_right"></div>
       </div>
     </div>
 
-    <div class="rank">
-      <div
-        class="green-rank"
-        v-for="(family, index) in sortedFamilys"
-        :key="index"
-      >
-        <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
-        <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
-        <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
-        <div class="friend-container">
-          <div class="profile">
-            <img :src="family.img" />
-          </div>
-          <div class="friend-info">
-            <h3>{{ family.name }}</h3>
-            <p>총 {{ family.range }}KM 산책</p>
-            <p>총 {{ family.time }}시간 산책</p>
-            <p>동반 산책 : {{ family.mate }}회</p>
-            <p>반려동물 산책 : {{ family.pet }}회</p>
+    <div class="Rank_middle">
+      <h3 id="myRank">가족 랭킹</h3>
+      <div class="arrow-buttons-container">
+        <!-- 왼쪽 화살표 버튼 -->
+        <div @click="MyRankPage" class="arrow-button left">&#60; 나의 랭킹</div>
+        <!-- 오른쪽 화살표 버튼 -->
+        <div @click="FriendRankPage" class="arrow-button right">
+          친구 랭킹 &#62;
+        </div>
+      </div>
+      
+      <div class="rank_margin">
+        <div class="rank">
+          <div
+            class="green-rank"
+            v-for="(family, index) in sortedFamilys"
+            :key="index"
+          >
+            <p v-if="index === 0" class="rank-icon">&#x1F947;</p>
+            <p v-else-if="index === 1" class="rank-icon">&#x1F948;</p>
+            <p v-else-if="index === 2" class="rank-icon">&#x1F949;</p>
+            <div class="friend-container">
+              <div class="profile">
+                <img :src="family.img" />
+              </div>
+              <div class="friend-info">
+                <h3>{{ family.name }}</h3>
+                <p>총 {{ family.range }}KM 산책</p>
+                <p>총 {{ family.time }}시간 산책</p>
+                <p>동반 산책 : {{ family.mate }}회</p>
+                <p>반려동물 산책 : {{ family.pet }}회</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="page-indicator">
+    <!-- <div class="page-indicator">
       <span class="empty"></span>
       <span class="filled"></span>
       <span class="empty"></span>
       <span class="empty"></span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -80,7 +88,11 @@ export default {
 
 <style scoped>
 #Familyrankingpg {
-  height: 100vh;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* scoped 속성을 사용하여 컴포넌트 내에서만 스타일이 적용되도록 설정 */
