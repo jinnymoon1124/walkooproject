@@ -280,7 +280,7 @@ export default {
 .image2 {
   width: 50%;
   border-radius: 50%;
-  margin: 40px;
+  margin: 1%;
 }
 .found {
   font-size: 25px;

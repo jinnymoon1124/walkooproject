@@ -14,10 +14,8 @@
 
     <!-- middle -->
     <div class="middle">
-
       <!-- middle_1 -->
       <div class="middle_1">
-
         <!-- 이번 달 사용자 산책 정보 -->
         <div class="user_information_box">
           <p class="user_information">
@@ -51,13 +49,14 @@
 
         <!-- 알림 버튼 -->
         <div class="alarm_box">
-          <img src="../assets/MyPage/icon_alarm.png" alt="알람 아이콘" />
+          <router-link to="/alarm" class="circle-button">
+            <img src="../assets/MyPage/icon_alarm.png" alt="알람 아이콘" />
+          </router-link>
         </div>
       </div>
 
       <!-- middle_2 -->
       <div class="middle_2">
-
         <!-- 애완동물 이미지 -->
         <div class="pet_profile">
           <img class="pet_profile_img" src="" alt="" />
@@ -65,10 +64,9 @@
 
         <!-- 애완동물 정보 -->
         <div class="pet_status">
-
           <!-- 애완동물 산책레벨 -->
           <div class="pet_level">LV.1</div>
-          
+
           <!-- 애완동물 레벨 바 -->
           <div class="level_progressbar_wrap">
             <div class="level_progressbar" style="width: 69%"></div>
@@ -84,7 +82,6 @@
 
       <!-- middle_4 -->
       <div class="middle_4">
-
         <!-- 배지 버튼 -->
         <div class="middle_4_wrap">
           <div class="btn_wrap btn_badge" @click="$router.push('./badgepage')">
@@ -123,7 +120,6 @@
 
       <!-- middle_6 -->
       <div class="middle_6">
-
         <!-- 공지사항 버튼 -->
         <div class="middle_6_wrap">
           <div class="btn_wrap btn_badge">

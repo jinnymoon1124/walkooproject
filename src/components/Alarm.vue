@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div class="alarmpage">
     <div class="pg_alarm">
       <img
         src="@/assets/backbutton.png"
         alt="backButton"
         class="back-button"
-        @click="$router.push('/')"
+        @click="$router.go(-1)"
       />
       알림이 왔어요!<br />
     </div>
+
     <div v-if="showBanner" class="banner">
       <img
         src="../assets/StarbucksLogo.png"
@@ -22,20 +23,21 @@
       </div>
     </div>
 
-    <div class="alarmbox">
-      <img
-        src="../assets/friendimage/jinny.png"
-        alt="jinnypc"
-        class="alarmpng"
-      />
-      <div class="walk-requests">
+    <div class="alarmlist">
+      <div class="alarmbox">
+        <img
+          src="../assets/friendimage/jinny.png"
+          alt="jinnypc"
+          class="alarmpng"
+        />
         <div
           v-for="(request, index) in friendRequests"
           :key="index"
           class="friend-request"
         >
           <div class="asktitle">
-            '{{ request }}' 님이 산책 신청을 했어요!<br /><br />
+            '{{ request }}' 님이 <br />
+            산책 신청을 했어요!<br /><br />
           </div>
 
           <div>
@@ -44,7 +46,7 @@
           </div>
           <br />
 
-          <div>
+          <div class="alarm_yn">
             <button class="friendreject" @click="openModal = false">
               거절
             </button>
@@ -54,25 +56,24 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="alarmbox">
-      <img
-        src="../assets/friendimage/naheecode.png"
-        alt="naheepc"
-        class="alarmpng"
-      />
-      <div class="friend-requests">
+      <div class="alarmbox">
+        <img
+          src="../assets/friendimage/naheecode.png"
+          alt="naheepc"
+          class="alarmpng"
+        />
         <div
           v-for="(request, index) in friendRequests"
           :key="index"
           class="friend-request"
         >
           <div class="asktitle">친구신청이왔어요!</div>
-          <br />'{{ request }}' 님에게 친구 신청이 왔습니다 <br />
+          <br />'{{ request }}' 님에게 <br />
+          친구 신청이 왔습니다 <br />
           수락하시겠습니까? <br /><br />
 
-          <div>
+          <div class="alarm_yn">
             <button class="friendreject" @click="openModal = false">
               거절
             </button>
@@ -102,80 +103,95 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.alarmpage {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
 .pg_alarm {
   text-align: left;
   font-weight: bold;
-  font-size: 50px;
+  font-size: 2rem;
   color: #4a4a4a;
-}
-
-.friend-request {
-  margin-bottom: 10px;
-  font-size: larger;
 }
 
 .banner {
   background-color: rgb(92, 86, 86);
-  padding: 3px 40px;
+  padding: 3%;
   display: flex;
   align-items: center;
-  height: 200px;
+  height: 130px;
+  box-sizing: border-box;
 }
-
 .bannerimage {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
-
 .bannertext {
   color: #f1f1f1;
-  font-size: xx-large;
-  margin-left: 80px;
+  font-size: large;
+  margin-left: 2%;
 }
 
-.alarmbox {
-  width: 90%;
-
+.alarmlist {
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+.alarmbox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-start; */
+  padding: 2%;
   box-sizing: border-box;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin-left: 36px;
-  margin-top: 35px;
+  margin-bottom: 2%;
 }
-
 .alarmpng {
-  width: 28%;
-  height: 28%;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  margin: 5px 50px 5px 10px;
+  margin: 2%;
 }
 
+.friend-request {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.asktitle {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.alarm_yn {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .friendreject {
-  padding: 10px 60px;
+  width: 40%;
   background-color: #7a7878;
   border: none;
   border-radius: 25px;
   color: #ffffff;
   font-size: 2rem;
-  margin-right: 10px;
 }
-
 .friendaccept {
-  padding: 10px 60px;
+  width: 40%;
   background-color: #585757;
   border: none;
   border-radius: 25px;
   color: #ffffff;
   font-size: 2rem;
-  margin-left: 10px;
-}
-
-.asktitle {
-  font-weight: bold;
-  font-size: larger;
 }
 </style>

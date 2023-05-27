@@ -120,15 +120,15 @@ export default defineComponent({
   justify-content: space-between;
   align-items: flex-end;
 }
-.title {
+.MainPage .title {
   color: white;
   text-shadow: 1px 1px 1px #000; /* 텍스트 그림자 추가 */
   padding: 1em;
 }
-.btn_wrap.alarm {
+.MainPage .btn_wrap.alarm {
   padding: 1em;
 }
-.circle-button {
+.MainPage .circle-button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -138,20 +138,20 @@ export default defineComponent({
   align-items: center;
   background-color: rgb(254, 253, 205);
 }
-.house-image {
+.MainPage .house-image {
   width: 90%;
   max-width: fit-content;
   height: auto;
   max-height: 35%;
   margin: 0 5%;
 }
-.btn_wrap.walking-btn {
+.MainPage .btn_wrap.walking-btn {
   /* padding: 0.5em; */
   flex-grow: 1;
   display: flex;
   align-items: center;
 }
-.walking-button {
+.MainPage .walking-button {
   background-color: #ffebb6;
   font-size: 2em;
   border-radius: 30%;
@@ -162,11 +162,11 @@ export default defineComponent({
   width: 5em;
   height: 5em;
 }
-.walking-link {
+.MainPage .walking-link {
   text-decoration: none;
   color: rgb(52, 52, 52);
 }
-.circle-button img {
+.MainPage .circle-button img {
   width: 80%;
   height: 80%;
 }
