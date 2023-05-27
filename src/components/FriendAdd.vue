@@ -236,13 +236,18 @@ export default {
   width: 100%;
   height: 90vh;
   background: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed;
   padding: 20px;
   box-sizing: border-box;
   z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media (min-width: 1024px) {
+  .black-bg2 {
+    width: 750px;
+  }
 }
 .white-bg2 {
   width: 100%;

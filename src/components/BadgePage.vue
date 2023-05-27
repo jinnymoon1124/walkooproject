@@ -85,6 +85,11 @@ export default {
   align-items: center;
   justify-content: center;
 }
+@media (min-width: 1024px) {
+  .MBcheck_bg {
+    width: 750px;
+  }
+}
 .MBcheck {
   width: 50%;
   background: white;

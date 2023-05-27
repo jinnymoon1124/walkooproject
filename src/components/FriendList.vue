@@ -271,10 +271,15 @@ export default {
   width: 100%;
   height: 90vh;
   background: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed;
   padding: 20px;
   box-sizing: border-box;
   z-index: 4;
+}
+@media (min-width: 1024px) {
+  .black-bg {
+    width: 750px;
+  }
 }
 .white-bg {
   width: 100%;
