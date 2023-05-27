@@ -1,14 +1,17 @@
 <template>
   <div id="friendlistpg">
     <!-- 아이디를 입력하라는 모달창 -->
-    <!-- <div class="black-bg" v-if="openModal == true && selectedFriend">
+    <div class="black-bg" v-if="openModal == true && selectedFriend">
       <div class="white-bg">
-        <h2>약속장소와 시간을 입력하세요!</h2>
-        <div class="container2" style="display: flex">
+        <h2>
+          약속장소와 시간을 <br />
+          입력하세요!
+        </h2>
+        <div class="container2">
           <p class="place">장소</p>
           <input type="text" class="textfield" />
         </div>
-        <div class="container2" style="display: flex">
+        <div class="container2">
           <p class="time">시간</p>
           <input type="text" class="textfield" />
         </div>
@@ -23,32 +26,29 @@
         <label>
           <input type="radio" name="option" value="1" ref="radio1" />
           <span class="custom-radio"></span>
-          사람끼리만 산책해요!
+          <p>사람끼리만 산책해요!</p>
         </label>
-        <br />
         <label>
           <input type="radio" name="option" value="2" ref="radio2" />
           <span class="custom-radio"></span>
-          반려동물과 함께해요!
+          <p>반려동물과 함께해요!</p>
         </label>
-        <br />
         <label>
           <input type="radio" name="option" value="3" ref="radio3" />
           <span class="custom-radio"></span>
-          상관없어요~
+          <p>상관없어요~</p>
         </label>
-        <br />
-        <br />
-        <br />
 
-        <button class="no" @click="openModal = false && hideDetails">
-          아니오
-        </button>
-        <button class="yes" @click="openModal = false && hideDetails">
-          네
-        </button>
+        <div class="yes_no">
+          <button class="yes" @click="openModal = false && hideDetails">
+            네
+          </button>
+          <button class="no" @click="openModal = false && hideDetails">
+            아니오
+          </button>
+        </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="upperbar">
       <img
@@ -68,7 +68,7 @@
     <div class="friend-list-box1">
       <div class="friend-list-box2">
         <div class="friend-list2">
-          <!-- <div
+          <div
             v-for="friend in friends"
             :key="friend.id"
             class="friend2"
@@ -86,7 +86,7 @@
             >
               산책 신청
             </button>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -183,36 +183,40 @@ export default {
   flex-direction: column;
 }
 .upperbar {
+  width: 100%;
+  height: 5%;
   display: flex;
   align-items: center;
-}
-.friendadd-button2_btn_wrap {
-  display: flex;
-  padding: 1%;
-  flex-grow: 1;
-  /* padding-left: 30vw; */
-  justify-content: space-between;
-}
-.friendadd-button2_btn_wrap > .friendadd-button2 {
-  width: 100px;
-  height: 40px;
-  border-radius: 30px;
-  border: none;
-}
-.upperbar > .friendadd-button2:hover {
-  border: 5px solid grey;
-  font-weight: bold;
-  transform: scale(1, 1);
-  transition: all 0.5s;
 }
 .upperbar > h1 {
   font-size: 20px;
   padding-left: 20px;
 }
+.friendadd-button2_btn_wrap {
+  display: flex;
+  height: 100%;
+  padding: 1% 2%;
+  flex-grow: 1;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.friendadd-button2_btn_wrap > .friendadd-button2 {
+  width: 100px;
+  height: 100%;
+  border-radius: 30px;
+  border: none;
+}
+.friendadd-button2_btn_wrap > .friendadd-button2:hover {
+  border: 5px solid grey;
+  font-weight: bold;
+  transform: scale(1, 1);
+  transition: all 0.5s;
+}
 .friend-list-box1 {
   width: 100%;
   height: 95%;
-  padding: 2%;
+  padding: 0 2%;
+  padding-bottom: 2%;
   box-sizing: border-box;
 }
 .friend-list-box2 {
@@ -230,9 +234,11 @@ export default {
 }
 
 .friend-list2 {
+  width: 100%;
   margin: 0;
   padding: 0;
   white-space: nowrap;
+  overflow-y: scroll;
 }
 .friend2 {
   display: flex;
@@ -240,7 +246,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid rgb(198, 196, 196);
-  padding-bottom: 20px;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
 .friend-image2 {
   width: 100px;
@@ -248,7 +255,6 @@ export default {
 }
 .friend-name2 {
   font-size: 100%;
-  padding-left: 40px;
   font-weight: bold;
 }
 
@@ -261,33 +267,97 @@ export default {
   font-size: 1.1rem;
 }
 
-.found {
-  font-size: 25px;
-}
-
-.image2 {
-  width: 50%;
-  border-radius: 50%;
-}
-
 .black-bg {
-  width: 95%;
-  height: 100%;
+  width: 100%;
+  height: 90vh;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   padding: 20px;
+  box-sizing: border-box;
   z-index: 4;
 }
-
 .white-bg {
-  width: 70%;
-
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: rgb(235, 233, 232);
   border-radius: 30px;
-  padding: 70px;
+  padding: 25px;
   font-size: 20px;
+  box-sizing: border-box;
 }
 
+.container2 {
+  display: flex;
+  padding: 3px 0px;
+}
+.textfield {
+  border-radius: 8px;
+  width: 75%;
+  height: 2em;
+  padding: 1%;
+}
+.time,
+.place {
+  background-color: #585757;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 20%;
+  height: auto;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.found {
+  font-size: 25px;
+}
+.image2 {
+  width: 150px;
+  border-radius: 50%;
+}
+
+label {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding: 1%;
+  margin: 4px 0;
+  box-sizing: border-box;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #fcf7e0;
+  color: rgb(76, 76, 76);
+}
+label p {
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+input[type="radio"] {
+  display: none;
+}
+.custom-radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 4px solid #ccc;
+  background-color: #ada1a1;
+}
+input[type="radio"]:checked + .custom-radio {
+  background-color: #ffdf52;
+  border-color: #ffdf52;
+}
+
+.yes_no {
+  flex-grow: 1;
+  display: flex;
+}
 .no {
   width: 200px;
   height: 60px;
@@ -320,57 +390,5 @@ export default {
   color: white;
   transform: scale(1, 1);
   transition: all 0.3s;
-}
-
-.textfield {
-  border-radius: 8px;
-  width: 300px;
-  height: 35px;
-  padding: 5px 15px;
-}
-
-.time,
-.place {
-  background-color: #585757;
-  color: #ffffff;
-  border-radius: 10px;
-  width: 70px;
-  height: 37px;
-  border: none;
-  padding: 10px 5px 0px 5px;
-}
-
-.container2 {
-  display: flex;
-  padding-left: 40px;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-.custom-radio {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 4px solid #ccc;
-  background-color: #ada1a1;
-}
-input[type="radio"]:checked + .custom-radio {
-  background-color: #ffdf52;
-  border-color: #ffdf52;
-}
-
-label {
-  display: inline-block;
-  padding: 30px;
-  border-radius: 20px;
-  font-size: 25px;
-  font-weight: bolder;
-  cursor: pointer;
-  width: 300px;
-  background-color: #fcf7e0;
-  color: rgb(76, 76, 76);
 }
 </style>

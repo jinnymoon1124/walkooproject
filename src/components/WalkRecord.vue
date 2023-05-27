@@ -22,10 +22,16 @@
           <div class="thismonth">{{ year }}년 {{ month }}월</div>
           <button @click="nextMonth">&gt;</button>
         </div>
-        <div class="days">
+        <div class="days of_week">
           <div class="day" v-for="(day, index) in days" :key="index">
             {{ day }}
           </div>
+        </div>
+
+        <div class="days">
+          <!-- <div class="day" v-for="(day, index) in days" :key="index">
+            {{ day }}
+          </div> -->
           <div
             class="date"
             v-for="day in getDaysInMonth()"
@@ -318,8 +324,14 @@ export default {
 .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   /* grid-auto-rows: 130px; 변경된 높이 */
   flex-grow: 1;
+}
+
+.days.of_week {
+  grid-template-rows: repeat(1, 50px);
+  flex-grow: unset;
 }
 
 .date {

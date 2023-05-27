@@ -19,8 +19,10 @@
             {{ friend.name }}님이 발견되었습니다! <br />
             추가하시겠습니까?
           </p>
-          <button class="reject" @click="openModal = false">거절</button>
-          <button class="accept" @click="openModal = false">수락</button>
+          <div class="YorN">
+            <button class="reject" @click="openModal = false">거절</button>
+            <button class="accept" @click="openModal = false">수락</button>
+          </div>
         </div>
       </div>
     </div>
@@ -32,26 +34,31 @@
         @click="goBack"
       />
       <h1>친구 추가</h1>
-      <button class="friendadd-button2" @click="openModal = true">
-        ID<br />친구추가
-      </button>
+      <div class="friendadd-button2_btn_wrap">
+        <div></div>
+        <button class="friendadd-button2" @click="openModal = true">
+          아이디로 친구추가
+        </button>
+      </div>
     </div>
-    <div class="friend-list-box2">
-      <div class="friend-list2">
-        <div
-          v-for="friend in friends"
-          :key="friend.id"
-          class="friend2"
-          :src="`@/assets/friendimages/${name}`"
-        >
-          <img :src="friend.image" alt="friendimage" class="friend-image2" />
-          <span class="friend-name2">{{ friend.name }}</span>
+    <div class="friend-list-box1">
+      <div class="friend-list-box2">
+        <div class="friend-list2">
+          <div
+            v-for="friend in friends"
+            :key="friend.id"
+            class="friend2"
+            :src="`@/assets/friendimages/${name}`"
+          >
+            <img :src="friend.image" alt="friendimage" class="friend-image2" />
+            <span class="friend-name2">{{ friend.name }}</span>
 
-          <img
-            src="../assets/addfriendbutton.png"
-            alt="addfriendbutton"
-            class="addfriend-button2"
-          />
+            <img
+              src="../assets/addfriendbutton.png"
+              alt="addfriendbutton"
+              class="addfriend-button2"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -136,33 +143,52 @@ export default {
 
 <style scoped>
 #friendaddpg {
-  height: 100vh;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .upperbar {
+  width: 100%;
+  height: 5%;
   display: flex;
   align-items: center;
 }
-.upperbar > .friendadd-button2 {
-  width: 150px;
-  height: 70px;
-  margin-left: 300px;
+.upperbar > h1 {
+  font-size: 20px;
+  padding-left: 20px;
+}
+.friendadd-button2_btn_wrap {
+  display: flex;
+  height: 100%;
+  padding: 1% 2%;
+  flex-grow: 1;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.friendadd-button2_btn_wrap > .friendadd-button2 {
+  width: 130px;
+  height: 100%;
   border-radius: 30px;
   border: none;
 }
-.upperbar > .friendadd-button2:hover {
+.friendadd-button2_btn_wrap > .friendadd-button2:hover {
   border: 5px solid grey;
   font-weight: bold;
   transform: scale(1, 1);
   transition: all 0.5s;
 }
-.upperbar > h1 {
-  font-size: 50px;
-  margin-left: 20px;
-}
 
+.friend-list-box1 {
+  width: 100%;
+  height: 95%;
+  padding: 0 2%;
+  padding-bottom: 2%;
+  box-sizing: border-box;
+}
 .friend-list-box2 {
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -172,37 +198,34 @@ export default {
   background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin-left: 36px;
 }
 
 .friend-list2 {
+  width: 100%;
   margin: 0;
   padding: 0;
   white-space: nowrap;
+  overflow-y: scroll;
 }
 .friend2 {
-  margin: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid rgb(198, 196, 196);
-  padding-bottom: 20px;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
 .friend-image2 {
   width: 100px;
   border-radius: 50%;
-  margin-left: 10px;
 }
 .friend-name2 {
-  margin-top: 1px;
-  font-size: 25px;
-  padding-left: 40px;
+  font-size: 100%;
   font-weight: bold;
 }
 
 .addfriend-button2 {
-  margin-left: 320px;
   padding: 10px 15px 10px 20px;
   background-color: #dcdada;
   cursor: pointer;
@@ -210,32 +233,43 @@ export default {
 }
 
 .black-bg2 {
-  width: 95%;
-  height: 100%;
+  width: 100%;
+  height: 90vh;
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   padding: 20px;
+  box-sizing: border-box;
   z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .white-bg2 {
-  width: 70%;
+  width: 100%;
   background: rgb(235, 233, 232);
   border-radius: 30px;
-  padding: 70px;
-  font-size: 20px;
-  margin: auto;
-  margin-top: 10vh;
+  padding: 5%;
+  box-sizing: border-box;
+  font-size: 15px;
 }
-
+.white-bg2 h2 {
+  padding-bottom: 5%;
+}
+.textfield {
+  border-radius: 8px;
+  width: 90%;
+  height: 45px;
+  padding-left: 10px;
+  border: 4px solid gray;
+}
 .ok {
   border-radius: 8px;
-  margin-left: 10px;
+  margin-top: 5%;
   width: 60px;
   height: 50px;
   border: 4px solid lightgray;
   font-weight: bold;
 }
-
 .ok:hover {
   border: 5px solid grey;
   background-color: grey;
@@ -243,33 +277,30 @@ export default {
   transform: scale(1, 1);
   transition: all 0.2s;
 }
-
-.textfield {
-  border-radius: 8px;
-  width: 300px;
-  height: 45px;
-  padding-left: 10px;
-  border: 4px solid gray;
-}
-.found {
-  font-size: 25px;
-}
-
 .image2 {
   width: 50%;
   border-radius: 50%;
   margin: 40px;
 }
+.found {
+  font-size: 25px;
+  margin-bottom: 5%;
+}
 
+.YorN {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .reject {
-  padding: 10px 60px;
+  width: 40%;
+  padding: 0 10%;
   background-color: #dcdada;
   border: none;
   border-radius: 25px;
   color: #4a4a4a;
   font-size: 1.7rem;
   font-weight: bold;
-  margin-right: 10px;
 }
 
 .reject:hover {
@@ -281,13 +312,13 @@ export default {
 }
 
 .accept {
-  padding: 10px 60px;
+  width: 40%;
+  padding: 0 10%;
   background-color: #dcdada;
   border: none;
   border-radius: 25px;
   color: #4a4a4a;
   font-size: 1.7rem;
-  margin-left: 10px;
   font-weight: bolder;
 }
 
