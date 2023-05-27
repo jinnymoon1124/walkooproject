@@ -25,7 +25,7 @@
                 <div>{{ day }}</div>
                 <div class="report-button-container">
                   <button class="report-button" @click="openReport()">
-                    산책기록 보고서
+                    🤍 <br/>산 책 기 록 
                   </button>
                 </div>
               </div>
@@ -267,14 +267,13 @@ flex-direction: column;
   display:inline-block;
   justify-content: center;
   height: 100%; /* 이 부분을 수정하면 일 그리드 셀의 너비가 조정됩니다. */
-  border-top: 1px solid #ccc;
   cursor: pointer;  
   padding-top: 10px;
   box-sizing: border-box;
 }
 
 .date:hover {
-  box-shadow: inset 0 0 0 2px rgb(130, 0, 32);
+  box-shadow: inset 0 0 0 2px rgb(146, 146, 146);
   transition: all 0.1s;
 }
 .date.sunday {
@@ -282,11 +281,11 @@ flex-direction: column;
 }
 
 .today {
-  background-color: #ffa3a3;
+  background-color: #b7ba8c;
+  border-radius: 10px;
 }
 
 .selected {
-  color: #7c0505;
   font-weight: 900;
 }
 
@@ -327,6 +326,22 @@ margin-top: 20px;
   display:inline-block;
   justify-content: center;
   padding-top: 10px;
+}
+
+.report-button{
+  width: 90px;
+  height: 70px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(254, 233, 138);
+  font-weight: bold;
+  line-height: 150%;
+
+}
+.report-button:hover{
+  border: 1px solid grey;
+  transform: scale(1, 1);
+  transition: all 0.3s
 }
 
 </style>

@@ -17,7 +17,7 @@
                 <div class="todaydata_1">
                     <div class="walk">
                         <img src="../assets/walkicon.png">
-                        <p>0 걸음</p>
+                        <p>{{steps}} 걸음</p>
 
                     </div>
                     <div class="kcal">
@@ -59,6 +59,7 @@ export default {
             },
             totalDistance : 0,
             images: Array(5).fill(pointImage),
+            steps : 0,
 
         };
     },
@@ -71,7 +72,7 @@ export default {
         console.log('timeData:', this.timeData);
 
         this.totalDistance = parseFloat(this.$route.query.distance); // Assign the value of distance to totalDistance
-        console.log('이미지데이터 : ', this.changedImageCount);
+        this.steps = parseInt(this.$route.query.steps); // 걸음수 데이터
 
         this.changeImages();
     },

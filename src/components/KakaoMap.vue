@@ -37,7 +37,7 @@
         <div id="datacontainer">
             <div class="walkdata">
                 <img src="../assets/walkicon.png">
-                <p>0 걸음</p>
+                <p>{{averageNumberOfSteps}} 걸음</p>
             </div>
             <div class="timerdata">
                 <img src="../assets/timericon.png">
@@ -96,6 +96,7 @@ function calculateCaloriesBurned(distance) {
 }
 
 
+
 export default {
     name: 'KakaoMap',
     components: {
@@ -121,7 +122,7 @@ export default {
             timerId : null,
             polyline: null,
             images : Array(5).fill(pointImage),
-
+            averageNumberOfSteps: 0,
         };
     },
     mounted() {
@@ -189,6 +190,12 @@ export default {
             this.watchId = navigator.geolocation.watchPosition(success, error, watchOptions);
         
         },
+        calculateAverageSteps(distance) {
+            const averageWalk = 0.762; // 평균적으로 성인 걸음 당 미터
+            const distanceInMeters = distance * 1000;
+            const averageNumberOfSteps = Math.round(distanceInMeters / averageWalk);
+            return averageNumberOfSteps;
+        },
         startRandomMovement() {
             if (this.position) {
                 const { latitude, longitude } = this.position;
@@ -206,6 +213,11 @@ export default {
                 if (this.previousPosition) {
                     const newDistance = calculateDistance(this.previousPosition, newPosition);
                     this.distance += newDistance;
+
+                    const averageSteps = this.calculateAverageSteps(this.distance); // 걸음수 계산
+                    this.averageNumberOfSteps = averageSteps;
+
+
                 }
                 this.previousPosition = newPosition;
 
@@ -216,6 +228,7 @@ export default {
             console.error('Position is not available.');
             }
         },
+        
         stopTracking() {
             navigator.geolocation.clearWatch(this.watchId);
             this.distance = 0;
@@ -257,6 +270,7 @@ export default {
                     seconds: timeData.seconds,
                     distance: this.totalDistance,
                     calories: calculateCaloriesBurned(this.totalDistance), 
+                    steps: this.averageNumberOfSteps
                 },
             });
         },
