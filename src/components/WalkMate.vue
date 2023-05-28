@@ -2,7 +2,6 @@
   <div class="WalkMate">
     <div class="header">
       <div class="line"></div>
-
       <div class="top_wrap">
         <div class="top_left">
           <img src="../assets/004.png" @click="$router.go(-1)" />
@@ -10,67 +9,61 @@
         <p class="top_center header_name">산책 동행인 추가</p>
         <div class="top_right"></div>
       </div>
-      <!-- <div class="left">
-        <router-link to="/"> -->
-      <!-- <img src="../assets/LeftIcon.png" alt="back" @click="$router.go(-1)" /> -->
-      <!-- </router-link>
-      </div> -->
     </div>
-    <!-- <div style="border-top: 1px solid black "></div> -->
-    <!-- <div class="container">
-      <div class="centered-text">
-        <h1>산책 동행인 추가</h1>
-      </div>
-    </div>
-    <div class="container">
-      <div class="box" ref="box">
-        <div
-          v-for="index in selectedCircles"
-          :key="index"
-          class="circle-img circle"
-        >
-          <img :src="getPerson(index).image" :alt="getPerson(index).name" />
-          <div class="name">{{ getPerson(index).name }}</div>
+
+    <div class="WalkMate_middle_1">
+      <div class="container">
+        <div class="box" ref="box">
+          <div
+            v-for="index in selectedCircles"
+            :key="index"
+            class="circle-img circle"
+          >
+            <img :src="getPerson(index).image" :alt="getPerson(index).name" />
+            <div class="name">{{ getPerson(index).name }}</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="text-box">
-      <p>산책 동행인 추가 - 가족</p>
-    </div>
-    <div class="white-box">
-      <div
-        v-for="(person, index) in peopleFamily"
-        :key="index"
-        class="circle-img circle"
-        :class="{ selected: selectedCircles.includes(index) }"
-        @click="selectCircle(index)"
-      >
-        <img :src="person.image" :alt="person.name" />
-        <p class="name">{{ person.name }}</p>
+    <div class="WalkMate_middle_2">
+      <div class="text-box">가족 동행인 추가</div>
+      <div class="white-box">
+        <div
+          v-for="(person, index) in peopleFamily"
+          :key="index"
+          class="circle-img circle"
+          :class="{ selected: selectedCircles.includes(index) }"
+          @click="selectCircle(index)"
+        >
+          <img :src="person.image" :alt="person.name" />
+          <p class="name">{{ person.name }}</p>
+        </div>
       </div>
     </div>
-    <div class="text-box2">
-      <p>산책 동행인 추가 - 친구</p>
-    </div>
-    <div class="white-box2">
-      <div
-        v-for="(person, index) in peopleFriends"
-        :key="index"
-        class="circle-img circle"
-        :class="{
-          selected: selectedCircles.includes(index + peopleFamily.length),
-        }"
-        @click="selectCircle(index + peopleFamily.length)"
-      >
-        <img :src="person.image" :alt="person.name" />
-        <p class="name">{{ person.name }}</p>
+    <div class="WalkMate_middle_3">
+      <div class="text-box">친구 동행인 추가</div>
+      <div class="white-box">
+        <div
+          v-for="(person, index) in peopleFriends"
+          :key="index"
+          class="circle-img circle"
+          :class="{
+            selected: selectedCircles.includes(index + peopleFamily.length),
+          }"
+          @click="selectCircle(index + peopleFamily.length)"
+        >
+          <img :src="person.image" :alt="person.name" />
+          <p class="name">{{ person.name }}</p>
+        </div>
       </div>
     </div>
-    <button class="walkend-button">
-      <router-link to="/KakaoMap" class="WalkEnd-link">
-        <div class="WalkEnd-text">시 작</div>
-      </router-link>
-    </button> -->
+    <div class="WalkMate_middle_4">
+      <button class="walkend-button">
+        <router-link to="/KakaoMap" class="WalkEnd-link">
+          <div>시 작</div>
+        </router-link>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -222,8 +215,6 @@ export default defineComponent({
 .WalkMate {
   width: 100%;
   height: 100vh;
-  /* position: relative; */
-  /* background-color: #ebefff; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -233,11 +224,10 @@ export default defineComponent({
   width: 100%;
   height: 12%;
   display: flex;
-  /* justify-content: space-between; */
-  align-items: flex-end;
-  padding: 2%;
   box-sizing: border-box;
   /* background-color: #ffffff; */
+  flex-direction: column-reverse;
+  align-items: center;
 }
 .header_name {
   text-align: center;
@@ -253,63 +243,91 @@ export default defineComponent({
 .WalkMate .top_left img {
   width: 32px;
   height: 32px;
+  padding-left: 15%;
 }
-/* .left {
-  display: flex;
-  align-items: center;
-} */
 
-/* .left img {
-  width: 35px;
-  height: 35px;
-} */
+.WalkMate_middle_1 {
+  width: 100%;
+  height: 28%;
+  padding: 5% 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.WalkMate_middle_2 {
+  width: 100%;
+  height: 25%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.WalkMate_middle_3 {
+  width: 100%;
+  height: 25%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.WalkMate_middle_4 {
+  width: 100%;
+  height: 10%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.centered-text {
-  margin-top: -80px;
-}
-
-.box {
-  background-color: rgb(184, 183, 183);
-  height: 300px;
   width: 100%;
-  max-width: 750px;
-  margin-top: 60px;
+  height: 100%;
+  background-color: #e2f1ff;
+}
+.box {
+  height: 100%;
+  width: 100%;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.text-box {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  background-color: #b4bdc6;
   justify-content: center;
   align-items: center;
-  border-top: 10px solid rgb(255, 255, 255);
-  border-bottom: 10px solid rgb(255, 255, 255);
+}
+.white-box {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: auto;
 }
 
 .circle {
   background-color: hsl(0, 0%, 100%);
   border-radius: 50%;
-  margin: 10px 15px;
+  margin: 1%;
+  box-sizing: border-box;
   border: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
 }
-
 .circle-img {
   width: 120px;
-  height: 90px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
 }
-
 .circle-img img {
   width: 50%;
   height: 100%;
@@ -318,73 +336,17 @@ h1 {
   opacity: 0.5;
 }
 
-/* .box .circle-img img {
-  display: none;
-} */
-
-.text-box {
-  position: absolute;
-  margin-top: 510px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 750px;
-  padding: 3px;
-  background-color: #b4bdc6;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.white-box {
-  width: 750px;
-  height: 180px;
-  background-color: #ededed;
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: scroll;
-}
-
-.text-box2 {
-  position: absolute;
-  margin-top: 780px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 750px;
-  padding: 3px;
-  background-color: #b4bdc6;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.white-box2 {
-  width: 750px;
-  height: 180px;
-  background-color: #ededed;
-  margin-top: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: scroll;
-}
-
 .walkend-button {
-  position: absolute;
-  top: 1115px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 30px 60px;
+  width: 50%;
+  height: 90%;
   background-color: #ffebb6;
   color: rgb(52, 52, 52);
   font-size: 3rem;
   border-radius: 40px;
-  border: none;
   cursor: pointer;
-  font-weight: bold; /* 글씨 두껍게 설정 */
+  font-weight: bold;
   border: 3px solid rgb(0, 0, 0);
-  text-align: center;
 }
-
 .WalkEnd-link {
   display: block;
   text-decoration: none;
