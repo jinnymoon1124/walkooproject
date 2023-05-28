@@ -1,14 +1,23 @@
 <template>
   <div class="WalkMate">
     <div class="header">
-      <div class="left">
-        <router-link to="/">
-          <img src="../assets/004.png" alt="back" />
-        </router-link>
+      <div class="line"></div>
+
+      <div class="top_wrap">
+        <div class="top_left">
+          <img src="../assets/004.png" @click="$router.go(-1)" />
+        </div>
+        <p class="top_center header_name">산책 동행인 추가</p>
+        <div class="top_right"></div>
       </div>
+      <!-- <div class="left">
+        <router-link to="/"> -->
+      <!-- <img src="../assets/LeftIcon.png" alt="back" @click="$router.go(-1)" /> -->
+      <!-- </router-link>
+      </div> -->
     </div>
-    <div style="border-top: 1px solid black"></div>
-    <div class="container">
+    <!-- <div style="border-top: 1px solid black "></div> -->
+    <!-- <div class="container">
       <div class="centered-text">
         <h1>산책 동행인 추가</h1>
       </div>
@@ -61,7 +70,7 @@
       <router-link to="/KakaoMap" class="WalkEnd-link">
         <div class="WalkEnd-text">시 작</div>
       </router-link>
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -211,37 +220,49 @@ export default defineComponent({
 
 <style>
 .WalkMate {
-  position: relative;
-  background-color: #ebefff;
+  width: 100%;
+  height: 100vh;
+  /* position: relative; */
+  /* background-color: #ebefff; */
   display: flex;
   flex-direction: column;
-  max-width: 750px;
-  margin: 0 auto;
-  height: 100vh; /* 화면 높이를 100vh로 설정 */
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-color: #ebefff;
+  align-items: center;
 }
 
 .header {
+  width: 100%;
+  height: 12%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 750px;
-  margin: 0 auto;
-  padding: 16px;
-  background-color: #ffffff;
+  /* justify-content: space-between; */
+  align-items: flex-end;
+  padding: 2%;
+  box-sizing: border-box;
+  /* background-color: #ffffff; */
 }
+.header_name {
+  text-align: center;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 21px;
 
-.left {
+  text-align: center;
+  letter-spacing: -0.32px;
+}
+.WalkMate .top_left img {
+  width: 32px;
+  height: 32px;
+}
+/* .left {
   display: flex;
   align-items: center;
-}
+} */
 
-.left img {
+/* .left img {
   width: 35px;
   height: 35px;
-}
+} */
 
 .container {
   display: flex;

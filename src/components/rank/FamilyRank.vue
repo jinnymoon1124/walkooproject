@@ -10,7 +10,9 @@
     </div>
 
     <div class="Rank_middle">
-      <h3 id="myRank">가족 랭킹</h3>
+      <div class="myRank_wrap">
+        <h3 id="myRank">가족 랭킹</h3>
+      </div>
       <div class="arrow-buttons-container">
         <!-- 왼쪽 화살표 버튼 -->
         <div @click="MyRankPage" class="arrow-button left">&#60; 나의 랭킹</div>
@@ -19,7 +21,7 @@
           친구 랭킹 &#62;
         </div>
       </div>
-      
+
       <div class="rank_margin">
         <div class="rank">
           <div

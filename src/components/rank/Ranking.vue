@@ -10,7 +10,9 @@
     </div>
 
     <div class="Rank_middle">
-      <h3 id="myRank">나의 랭킹</h3>
+      <div class="myRank_wrap">
+        <h3 id="myRank">나의 랭킹</h3>
+      </div>
       <div class="arrow-buttons-container">
         <!-- 왼쪽 화살표 버튼 -->
         <div @click="PetRankPage" class="arrow-button">&#60; 반려동물 랭킹</div>
@@ -213,9 +215,15 @@ export default defineComponent({
 }
 
 /* 페이지 정보 바 */
+.myRank_wrap {
+  width: 100%;
+  height: 9%;
+  padding: 2%;
+  box-sizing: border-box;
+}
 #myRank {
   width: 100%;
-  height: 5%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,7 +235,7 @@ export default defineComponent({
 /* 페이지 이동 버튼 */
 .arrow-buttons-container {
   width: 100%;
-  height: 5%;
+  height: 3%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -243,7 +251,7 @@ export default defineComponent({
 /* 페이지 전체 테두리 */
 .rank_margin {
   width: 100%;
-  height: 90%;
+  height: 88%;
   padding: 2%;
   box-sizing: border-box;
 }
@@ -369,7 +377,7 @@ export default defineComponent({
 }
 
 /* top 가운데 정렬 */
-.top {
+.top_10 {
   text-align: center;
 }
 </style>

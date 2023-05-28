@@ -218,7 +218,7 @@ export default {
 
   color: #747474;
 }
-.badgepage .line {
+.line {
   width: 90%;
   height: 1px;
   background: #bcbcbc;

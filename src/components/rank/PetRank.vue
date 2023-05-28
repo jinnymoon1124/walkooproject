@@ -10,7 +10,9 @@
     </div>
 
     <div class="Rank_middle">
-      <h3 id="myRank">반려동물 랭킹</h3>
+      <div class="myRank_wrap">
+        <h3 id="myRank">반려동물 랭킹</h3>
+      </div>
       <div class="arrow-buttons-container">
         <!-- 왼쪽 화살표 버튼 -->
         <div @click="FriendRankPage" class="arrow-button left">
@@ -24,7 +26,7 @@
 
       <div class="rank_margin">
         <div class="rank">
-          <h3 class="top">TOP 10</h3>
+          <h3 class="top_10">TOP 10</h3>
           <div
             class="green-rank"
             v-for="(pet, index) in sortedPets.slice(0, 10)"
